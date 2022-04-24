@@ -1,0 +1,16 @@
+[NetworkTables Storage 3.0]
+double "/Shuffleboard/Drive/Gyro"=0
+double "/Shuffleboard/Drive/Mod 0 Cancoder"=-418.785
+double "/Shuffleboard/Drive/Mod 0 Integrated"=-418.785
+double "/Shuffleboard/Drive/Mod 0 Velocity"=0
+double "/Shuffleboard/Drive/Mod 1 Cancoder"=-382.928
+double "/Shuffleboard/Drive/Mod 1 Integrated"=-382.928
+double "/Shuffleboard/Drive/Mod 1 Velocity"=0
+double "/Shuffleboard/Drive/Mod 2 Cancoder"=-187.029
+double "/Shuffleboard/Drive/Mod 2 Integrated"=-187.029
+double "/Shuffleboard/Drive/Mod 2 Velocity"=0
+double "/Shuffleboard/Drive/Mod 3 Cancoder"=0
+double "/Shuffleboard/Drive/Mod 3 Integrated"=-352.867
+double "/Shuffleboard/Drive/Mod 3 Velocity"=0
+double "/Shuffleboard/Drive/Robot Position (X)"=0
+double "/Shuffleboard/Drive/Robot Position (Y)"=0
