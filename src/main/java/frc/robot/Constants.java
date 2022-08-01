@@ -16,6 +16,10 @@ public final class Constants {
     public static final boolean OPEN_LOOP = true;
     public static final boolean COMP_BOT = true;
     public static final boolean AUTO_LOG = false;
+    public static final double LIMELIGHT_FILTER_TIME_CONSTANT = 0.1; 
+    public static final double LIMELIGHT_FILTER_PERIOD_CONSTANT = 0.02;
+  
+
 
     public static final class Controllers{
         public static final GenericHID TRANSLATION_CONTROLLER = new GenericHID(0);
