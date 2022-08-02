@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.SystemsCheck;
+//import frc.robot.commands.SystemsCheck;
 
 
 /**
@@ -71,7 +71,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_robotContainer.s_Climber.disengageAll();
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
@@ -107,7 +107,7 @@ public class Robot extends TimedRobot {
     LiveWindow.disableAllTelemetry();
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
-    new SystemsCheck(m_robotContainer.s_Climber, m_robotContainer.s_DriveTrain, m_robotContainer.s_Intake, m_robotContainer.s_LimeLight, m_robotContainer.s_Shooter, m_robotContainer.xboxController, i);
+    //new SystemsCheck(m_robotContainer.s_Climber, m_robotContainer.s_DriveTrain, m_robotContainer.s_Intake, m_robotContainer.s_LimeLight, m_robotContainer.s_Shooter, m_robotContainer.xboxController, i);
     i++;
   }
 
