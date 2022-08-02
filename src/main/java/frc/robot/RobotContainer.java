@@ -59,7 +59,7 @@ public class RobotContainer {
   /* Subsystems */
   public final DriveTrain s_DriveTrain = new DriveTrain();
   public final LimeLight s_LimeLight = new LimeLight();
-  public final Shooter s_Shooter = new Shooter(s_LimeLight);
+  //public final Shooter s_Shooter = new Shooter(s_LimeLight);
   public final Intake s_Intake = new Intake();
   public final Climber s_Climber = new Climber();
   
@@ -139,13 +139,13 @@ public class RobotContainer {
 
     dPadUp.whenPressed(new InstantCommand(() -> s_Shooter.setFender()));
     dPadDown.whenPressed(new InstantCommand(() -> s_Shooter.setTarmac()));
-    dPadLeft.whenPressed(new InstantCommand(() -> s_Shooter.setLimeLight()));
+    //dPadLeft.whenPressed(new InstantCommand(() -> s_Shooter.setLimeLight()));
     dPadRight.whenPressed(new InstantCommand(() -> s_Shooter.setLaunchPad()));
 
     rightTrigger.whenPressed(c_FireShooter)
                 .whenReleased(new InstantCommand(() -> c_FireShooter.cancel()));
 
-    aButton.whenPressed(new InstantCommand(() -> s_LimeLight.turnLightOn()));
+    //aButton.whenPressed(new InstantCommand(() -> s_LimeLight.turnLightOn()));
             
   } 
 
