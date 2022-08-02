@@ -81,7 +81,7 @@ public class RobotContainer {
   private final FiveBallAuto3937 a_FiveBallAuto3937 = new FiveBallAuto3937(s_Climber, s_Intake, s_DriveTrain, s_LimeLight, s_Shooter);
   
   /* Commands */
-  private final AutoTargetDetection c_AutoTargetDetection = new AutoTargetDetection(s_DriveTrain, s_LimeLight);
+ // private final AutoTargetDetection c_AutoTargetDetection = new AutoTargetDetection(s_DriveTrain, s_LimeLight);
   private final FireShooter c_FireShooter = new FireShooter(s_Shooter, s_Intake);
 
   private final SendableChooser<Command> s_Command;
