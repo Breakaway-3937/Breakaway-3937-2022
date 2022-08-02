@@ -38,7 +38,7 @@ public class Shooter extends SubsystemBase {
   public double hoodRequestedPosition = Constants.Shooter.NORMAL_RUN;
   public double shooterRequestedVelocity = 2000;
   public boolean takeLimeLight = true;
-  private LimeLight s_LimeLight;
+  //private LimeLight s_LimeLight;
   private NetworkTableEntry hoodOffsetLimeLight, shooterOffsetLimeLight, hoodOffsetTarmac, shooterOffsetTarmac, hoodOffsetFender, shooterOffsetFender, hoodOffsetLaunch, shooterOffsetLaunch;
   public double hoodLime, shooterLime, hoodTarmac, shooterTarmac, hoodFender, shooterFender, shooterLaunch, hoodLaunch = 0;
   public boolean fender = false;
@@ -48,8 +48,8 @@ public class Shooter extends SubsystemBase {
   private double ticksPerRPM = 600.0/2048.0;
 
   /** Creates a new Shooter. */
-  public Shooter(LimeLight s_LimeLight) {
-    this.s_LimeLight = s_LimeLight;
+  public Shooter() {
+    //this.s_LimeLight = s_LimeLight;
     setValues();
     shooterMotor = new WPI_TalonFX(Constants.Shooter.SHOOTER_MOTOR_ID);
     configShooterMotor();
@@ -295,10 +295,10 @@ public class Shooter extends SubsystemBase {
     shooterVelocity = shooterEncoder.getIntegratedSensorVelocity() * ticksPerRPM * 0.8 * -1;
     tableHoodEncoder.setDouble(currentPosition);
     tableShooterVelocity.setDouble(shooterVelocity);
-    if(takeLimeLight){
-      hoodRequestedPosition = s_LimeLight.limeLightHood();
-      shooterRequestedVelocity = s_LimeLight.limeLightShooter();
-    }
+   // if(takeLimeLight){
+    //  hoodRequestedPosition = s_LimeLight.limeLightHood();
+    //  shooterRequestedVelocity = s_LimeLight.limeLightShooter();
+    //}
     hoodLime = hoodOffsetLimeLight.getDouble(0.0);
     shooterLime = shooterOffsetLimeLight.getDouble(0.0);
     hoodTarmac = hoodOffsetTarmac.getDouble(0.0);

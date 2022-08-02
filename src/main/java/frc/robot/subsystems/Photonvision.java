@@ -23,7 +23,7 @@ import frc.robot.Constants;
  * 
  */
 
-public class LimelightS extends SubsystemBase {
+public class Photonvision extends SubsystemBase {
   PhotonCamera limelight;
 
   private FilterValues filterValues;
@@ -32,7 +32,7 @@ public class LimelightS extends SubsystemBase {
   private LinearFilter yOffsetFilter;
 
   /** Creates a new LimelightS. */
-  public LimelightS() {
+  public Photonvision() {
     limelight = new PhotonCamera("gloworm");
 
     xOffsetFilter = LinearFilter.singlePoleIIR(Constants.LIMELIGHT_FILTER_TIME_CONSTANT,
