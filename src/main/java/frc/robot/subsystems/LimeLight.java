@@ -6,7 +6,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+/*package frc.robot.subsystems;
 
 import java.util.Map;
 
@@ -20,10 +20,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.LimeLight.LightMode.SnapMode;
 
+*/
 /**
  * The Lime Light Subsystem Singleton
  */
-public class LimeLight extends SubsystemBase{
+/*public class LimeLight extends SubsystemBase{
     private boolean flag = false;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -49,7 +50,7 @@ public class LimeLight extends SubsystemBase{
          * 
          * @return the LED mode as int
          */
-        public int getLedMode() {
+     /*   public int getLedMode() {
             return ledMode;
         }
 
@@ -69,7 +70,7 @@ public class LimeLight extends SubsystemBase{
              * 
              * @return The Stream Mode as an int
              */
-            public int getMode() {
+        /*    public int getMode() {
                 return mode;
             }
         }
@@ -90,7 +91,7 @@ public class LimeLight extends SubsystemBase{
              * 
              * @return The Cam Mode as an int
              */
-            public int getMode() {
+          /*  public int getMode() {
                 return mode;
             }
         }
@@ -109,7 +110,7 @@ public class LimeLight extends SubsystemBase{
              * 
              * @return The Cam Mode as an int
              */
-            public int getMode() {
+        /*    public int getMode() {
                 return mode;
             }
         }
@@ -133,7 +134,7 @@ public class LimeLight extends SubsystemBase{
     /**
      * Lime Light Driver Singleton
      */
-    public LimeLight() {
+  /*  public LimeLight() {
         tableAlignmentOffset = Shuffleboard.getTab("Drive").add("AlignmentOffset", 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -10, "max", 10)).withPosition(1, 1).getEntry();
         table = NetworkTableInstance.getDefault().getTable("limelight");
 
@@ -155,7 +156,7 @@ public class LimeLight extends SubsystemBase{
      * 
      * @return Whether the limelight has any valid targets (0 or 1)
      */
-    public boolean hasValidTarget() {
+ /*   public boolean hasValidTarget() {
         return (table.getEntry("tv").getDouble(0) == 0) ? false : true;
     }
 
@@ -175,7 +176,7 @@ public class LimeLight extends SubsystemBase{
      * @return Horizontal Offset From Crosshair To Target (LL1: -27 degrees to 27
      *         degrees | LL2: -29.8 to 29.8 degrees)
      */
-    public double getXAngle() {
+    /*public double getXAngle() {
         return ty.getDouble(0);
     }
 
@@ -185,7 +186,7 @@ public class LimeLight extends SubsystemBase{
      * @return Vertical Offset From Crosshair To Target (LL1: -20.5 degrees to 20.5
      *         degrees | LL2: -24.85 to 24.85 degrees)
      */
-    public double getYAngle() {
+    /*public double getYAngle() {
         return tx.getDouble(0);
     }
 
@@ -194,7 +195,7 @@ public class LimeLight extends SubsystemBase{
      * 
      * @return Target Area (0% of image to 100% of image)
      */
-    public double getArea() {
+    /*public double getArea() {
         return ta.getDouble(0);
     }
 
@@ -203,7 +204,7 @@ public class LimeLight extends SubsystemBase{
      * 
      * @return Skew or rotation (-90 degrees to 0 degrees)
      */
-    public double getSkew() {
+    /*public double getSkew() {
         return table.getEntry("ts").getDouble(0);
     }
 
@@ -213,7 +214,7 @@ public class LimeLight extends SubsystemBase{
      * @return The pipeline’s latency contribution (ms) Add at least 11ms for image
      *         capture latency.
      */
-    public double getDeltaTime() {
+    /*public double getDeltaTime() {
         return table.getEntry("tl").getDouble(0);
     }
 
@@ -222,7 +223,7 @@ public class LimeLight extends SubsystemBase{
      * 
      * @return Side length of shortest side of the fitted bounding box (pixels)
      */
-    public double getShortLength() {
+   /* public double getShortLength() {
         return table.getEntry("tshort").getDouble(0);
     }
 
@@ -231,7 +232,7 @@ public class LimeLight extends SubsystemBase{
      * 
      * @return Side length of longest side of the fitted bounding box (pixels)
      */
-    public double getLongLength() {
+   /* public double getLongLength() {
         return table.getEntry("tlong").getDouble(0);
     }
 
@@ -240,7 +241,7 @@ public class LimeLight extends SubsystemBase{
      * 
      * @return Horizontal side length of the rough bounding box (0 - 320 pixels)
      */
-    public double getHorizontalLength() {
+   /* public double getHorizontalLength() {
         return table.getEntry("thor").getDouble(0);
     }
 
@@ -249,7 +250,7 @@ public class LimeLight extends SubsystemBase{
      * 
      * @return Vertical side length of the rough bounding box (0 - 320 pixels)
      */
-    public double getVerticalLength() {
+ /*   public double getVerticalLength() {
         return table.getEntry("tvert").getDouble(0);
     }
 
@@ -258,7 +259,7 @@ public class LimeLight extends SubsystemBase{
      * 
      * @return True active pipeline index of the camera (0 .. 9)
      */
-    public int getPipeIndex() {
+  /*  public int getPipeIndex() {
         return (int) table.getEntry("getpipe").getDouble(0);
     }
 
@@ -267,16 +268,15 @@ public class LimeLight extends SubsystemBase{
      * 
      * @return Number array of corner x-coordinates
      */
-    public double[] getXCorners() {
+   /* public double[] getXCorners() {
         return table.getEntry("tcornx").getDoubleArray(new double[] { 0, 0, 0, 0 });
     }
-
     /**
      * The Y-Coordinates of the tracked box
      * 
      * @return Number array of corner y-coordinates
      */
-    public double[] getYCorners() {
+ /*   public double[] getYCorners() {
         return table.getEntry("tcorny").getDoubleArray(new double[] { 0, 0, 0, 0 });
     }
 
@@ -285,7 +285,7 @@ public class LimeLight extends SubsystemBase{
      * 
      * @param mode - LightMode (On, Off, Blinking, or determined by the pipeline)
      */
-    public void setLightState(LightMode mode) {
+  /*  public void setLightState(LightMode mode) {
         currentState = mode;
         table.getEntry("ledMode").setNumber(currentState.getLedMode());
         if(currentState == LIGHT_ON){
@@ -302,7 +302,7 @@ public class LimeLight extends SubsystemBase{
      * @param mode - VISION enables vision processing and decreases exposure, DRIVER
      *             disables vision processing and increases exposure
      */
-    public void setCamMode(LightMode.CamMode mode) {
+ /*   public void setCamMode(LightMode.CamMode mode) {
         table.getEntry("camMode").setNumber(mode.getMode());
 
     }
@@ -312,7 +312,7 @@ public class LimeLight extends SubsystemBase{
      * 
      * @param pipeline The pipeline index (0-9)
      */
-    public void setPipeline(int pipeline) {
+  /*  public void setPipeline(int pipeline) {
         table.getEntry("pipeline").setNumber(pipeline);
     }
 
@@ -322,7 +322,7 @@ public class LimeLight extends SubsystemBase{
      * @param streamMode - STANDARD is side by side, MAIN is Limelight big with
      *                   secondary camera in bottom right, SECONDARY is vice versa
      */
-    public void setStreamMode(LightMode.StreamMode streamMode) {
+  /*  public void setStreamMode(LightMode.StreamMode streamMode) {
         table.getEntry("stream").setNumber(streamMode.getMode());
     }
 
@@ -331,7 +331,7 @@ public class LimeLight extends SubsystemBase{
      * 
      * @param mode DISABLED turns Snap Mode off, Enabled turns Snap Mode on
      */
-    public void takeSnapshots(LightMode.SnapMode mode) {
+/*    public void takeSnapshots(LightMode.SnapMode mode) {
         table.getEntry("snapshot").setNumber(mode.getMode());
 
     }
@@ -339,7 +339,7 @@ public class LimeLight extends SubsystemBase{
     /**
      * Toggle the current Lime Light LED's between on and off states
      */
-    public void toggleLight() {
+  /*  public void toggleLight() {
         currentState = (currentState == LIGHT_ON) ? LIGHT_OFF : LIGHT_ON;
         setLightState(currentState);
     }
@@ -347,14 +347,14 @@ public class LimeLight extends SubsystemBase{
     /**
      * Turn the Lime Light LED's off
      */
-    public void turnLightOff() {
+  /*  public void turnLightOff() {
         setLightState(LIGHT_OFF);
     }
 
     /**
      * Turn the Lime Light LED's on
      */
-    public void turnLightOn() {
+   /* public void turnLightOn() {
         setLightState(LIGHT_ON);
     }
 
@@ -363,7 +363,7 @@ public class LimeLight extends SubsystemBase{
      * 
      * @return The Lime Light instance
      */
-    public static LimeLight getInstance() {
+  /*  public static LimeLight getInstance() {
         if (m_Instance == null) {
             m_Instance = new LimeLight();
         }
@@ -381,7 +381,7 @@ public class LimeLight extends SubsystemBase{
      * 
      * @return The distance between the robot and the limelight
      */
-    public double getDistance(double h1, double h2, double a1, double a2) {
+   /* public double getDistance(double h1, double h2, double a1, double a2) {
         return (h2 - h1) / Math.abs(Math.tan(Math.toRadians(a1) + Math.toRadians(a2)));
     }
 
@@ -399,7 +399,7 @@ public class LimeLight extends SubsystemBase{
     /**
      * Output diagnostics
      */
-    public void outputTelemetry() {
+  /*  public void outputTelemetry() {
         SmartDashboard.putBoolean("HasTarget", hasValidTarget());
         SmartDashboard.putNumber("Horizontal Offset", getXAngle());
         SmartDashboard.putNumber("Vertical Offset", getYAngle());
@@ -410,7 +410,7 @@ public class LimeLight extends SubsystemBase{
     /**
      * Send the custom choosers to Shuffleboard
      */
-    public void outputChoosers() {
+  /*  public void outputChoosers() {
         Shuffleboard.getTab("Teleop").add("Snapshot", m_snapshot_chooser);
         Shuffleboard.getTab("Teleop").add("Light Mode", m_light_chooser);
     }
