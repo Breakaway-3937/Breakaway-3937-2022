@@ -90,7 +90,7 @@ public class RobotContainer {
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
-  //public RobotContainer() {
+  public RobotContainer() {
   //  if(Constants.AUTO_LOG){
   //    DataLogManager.start();
   //    DataLogManager.logNetworkTables(false);
@@ -116,14 +116,14 @@ public class RobotContainer {
   //  autoTab.add("Command Chooser", s_Command).withPosition(0, 0);
     
   //  s_Shooter.hoodSetPosition(Constants.Shooter.NORMAL_RUN);
-  //  s_DriveTrain.setDefaultCommand(new TeleopSwerve(s_DriveTrain, translationController, rotationController, translationAxis, strafeAxis, rotationAxis, fieldRelative, openLoop));
+  s_DriveTrain.setDefaultCommand(new TeleopSwerve(s_DriveTrain, translationController, rotationController, translationAxis, strafeAxis, rotationAxis, fieldRelative, openLoop));
   //  s_Shooter.setDefaultCommand(new StartShooter(s_Shooter, xboxController));
   //  s_Intake.setDefaultCommand(new RunIntake(s_Intake, xboxController));
   //  s_Climber.setDefaultCommand(new ClimberState(s_Climber, xboxController));
 
     // Configure the button bindings
-  //  configureButtonBindings();
-  //}
+   configureButtonBindings();
+ }
 
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
