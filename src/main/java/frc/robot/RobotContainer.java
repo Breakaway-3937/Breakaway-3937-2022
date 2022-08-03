@@ -66,9 +66,9 @@ public class RobotContainer {
   /* Autos */
   private final DoNothing a_DoNothing = new DoNothing(s_Climber);
   private final LeaveTarmac a_LeaveTarmac = new LeaveTarmac(s_DriveTrain, s_Climber);
-  private final OneBallAuto a_OneBallAuto = new OneBallAuto(s_DriveTrain, s_LimeLight, s_Shooter, s_Intake, s_Climber, "OneBallAuto");
-  private final OneBallAuto a_OneBallAutoOne = new OneBallAuto(s_DriveTrain, s_LimeLight, s_Shooter, s_Intake, s_Climber, "OneBallAutoOne");
-  private final OneBallAuto a_OneBallAutoTwo = new OneBallAuto(s_DriveTrain, s_LimeLight, s_Shooter, s_Intake, s_Climber, "OneBallAutoTwo");
+  private final OneBallAuto a_OneBallAuto = new OneBallAuto(s_DriveTrain, s_Climber, s_Shooter, s_Intake);
+  private final OneBallAuto a_OneBallAutoOne = new OneBallAuto(s_DriveTrain, s_Climber, s_Shooter, s_Intake, 1);
+  private final OneBallAuto a_OneBallAutoTwo = new OneBallAuto(s_DriveTrain, s_Climber, s_Shooter, s_Intake, 2);
   private final TwoBallAuto a_TwoBallAuto = new TwoBallAuto(s_DriveTrain, s_LimeLight, s_Shooter, s_Intake, s_Climber, "TwoBallAuto");
   private final TwoBallAuto a_TwoBallAutoOne = new TwoBallAuto(s_DriveTrain, s_LimeLight, s_Shooter, s_Intake, s_Climber, "TwoBallAutoOne");
   private final TwoBallAuto a_TwoBallAutoTwo = new TwoBallAuto(s_DriveTrain, s_LimeLight, s_Shooter, s_Intake, s_Climber, "TwoBallAutoTwo");
