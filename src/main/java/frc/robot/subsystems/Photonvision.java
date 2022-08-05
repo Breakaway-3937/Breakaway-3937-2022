@@ -39,6 +39,9 @@ public class Photonvision extends SubsystemBase {
 
     yOffsetFilter = LinearFilter.singlePoleIIR(Constants.LIMELIGHT_FILTER_TIME_CONSTANT,
         Constants.LIMELIGHT_FILTER_PERIOD_CONSTANT);
+    
+    limelight.setPipelineIndex(1);
+    limelight.setDriverMode(false);
   }
 
 
@@ -48,8 +51,6 @@ public class Photonvision extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    limelight.setPipelineIndex(1);
-    limelight.setDriverMode(false);
     PhotonTrackedTarget target = limelight.getLatestResult().hasTargets()
         ? limelight.getLatestResult().getBestTarget()
         : new PhotonTrackedTarget(0, 0, 0, 0, new Transform2d(), new ArrayList<TargetCorner>());
