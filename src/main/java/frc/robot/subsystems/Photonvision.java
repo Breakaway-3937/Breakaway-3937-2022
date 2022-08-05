@@ -29,6 +29,11 @@ public class Photonvision extends SubsystemBase {
 
   private LinearFilter xOffsetFilter;
   private LinearFilter yOffsetFilter;
+  
+  final double CAMERA_ANGLE = Units.degreesToRadians(145);
+  
+  final double TARGET_HEIGHT_METERS = Units.feetToMeters(5); //FIXME 
+  final double CAMERA_HEIGHT_METERS = Units.inchesToMeters(5); //FIXME
 
   /** Creates a new LimelightS. */
   public Photonvision() {
@@ -56,7 +61,7 @@ public class Photonvision extends SubsystemBase {
         : new PhotonTrackedTarget(0, 0, 0, 0, new Transform2d(), new ArrayList<TargetCorner>());
     this.filterValues = new FilterValues(xOffsetFilter.calculate(target.getYaw()),
         yOffsetFilter.calculate(target.getPitch()));
-    SmartDashboard.putNumber("x offset", this.filterValues.getFilteredXOffset()); // TODO Oblog
+    SmartDashboard.putNumber("x offset", this.filterValues.getFilteredXOffset());
     SmartDashboard.putNumber("y offset", this.filterValues.getFilteredYOffset());
   }
 
