@@ -1,44 +1,93 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.autos;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.Constants;
 import frc.robot.subsystems.*;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+import java.util.List;
+
+
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.math.trajectory.TrajectoryConfig;
+import edu.wpi.first.math.trajectory.TrajectoryGenerator;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+
 public class ThreeBallAuto2910 extends SequentialCommandGroup {
-  /** Creates a new ThreeBallAuto2910. */
-  public ThreeBallAuto2910(DriveTrain s_DriveTrain, Intake s_Intake, Climber s_Climber, Shooter s_Shooter, LimeLight s_LimeLight) {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      new LowerArmAuto(s_Climber),
-      new WaitCommand(0.375),
-      new AutoIntakePickupNoDelay(s_DriveTrain, s_Intake, s_Climber, "2910ThreeBallAuto", true),
-      new AutoFireWithCheck(s_DriveTrain, s_LimeLight, s_Shooter, s_Intake),
-      new AutoIntakePickupNoDelay(s_DriveTrain, s_Intake, s_Climber, "2910ThreeBallAutoPart2"),
-      new AutoFireWithCheck(s_DriveTrain, s_LimeLight, s_Shooter, s_Intake),
-      new InstantCommand((() -> s_Shooter.stopShooter()))
-    );
-  }
-  public ThreeBallAuto2910(DriveTrain s_DriveTrain, Intake s_Intake, Climber s_Climber, Shooter s_Shooter, LimeLight s_LimeLight, double maxVel, double maxAccel) {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      new LowerArmAuto(s_Climber),
-      new WaitCommand(0.375),
-      new AutoIntakePickupNoDelay(s_DriveTrain, s_Intake, s_Climber, "2910ThreeBallAuto", true, maxVel, maxAccel),
-      new AutoFireWithCheck(s_DriveTrain, s_LimeLight, s_Shooter, s_Intake),
-      new AutoIntakePickupNoDelay(s_DriveTrain, s_Intake, s_Climber, "2910ThreeBallAutoPart2", maxVel, maxAccel),
-      new AutoFireWithCheck(s_DriveTrain, s_LimeLight, s_Shooter, s_Intake),
-      new InstantCommand((() -> s_Shooter.stopShooter()))
-    );
-  }
-}
+
+    String trajectoryJSON;
+    Trajectory trajectory = new Trajectory();
+
+    public ThreeBallAuto2910(DriveTrain s_Drivetrain, Climber s_Climber, Shooter s_Shooter, Intake s_Intake, LimeLight s_LimeLight){
+        TrajectoryConfig config =
+            new TrajectoryConfig(
+                    Constants.AutoConstants.KMAX_SPEED_METERS_PER_SECOND,
+                    Constants.AutoConstants.KMAX_ACCELERATION_METERS_PER_SECOND_SQUARED)
+                .setKinematics(Constants.DriveTrain.SWERVE_KINEMATICS);
+
+        Trajectory pathTrajectory =
+            TrajectoryGenerator.generateTrajectory(
+                List.of(new Pose2d(7.48, 1.74, Rotation2d.fromDegrees(-90)), 
+                new Pose2d(7.59, 0.64, Rotation2d.fromDegrees(-91.25)),
+                new Pose2d(6.36, 0.71, Rotation2d.fromDegrees(178.03)),
+                new Pose2d(3.79, 0.69, Rotation2d.fromDegrees(38)),
+                new Pose2d(3.99, 1.34, Rotation2d.fromDegrees(38.88))),
+                config);
+
+        Trajectory pathTrajectory1 =
+            TrajectoryGenerator.generateTrajectory(
+                List.of(new Pose2d(3.99, 1.34, Rotation2d.fromDegrees(38.88)), 
+                new Pose2d(5.19, 2.01, Rotation2d.fromDegrees(42.14))),
+                config);
               
+            var thetaController =
+            new ProfiledPIDController(
+                Constants.AutoConstants.KP_THETA_CONTROLLER, 0, 0, Constants.AutoConstants.KTHETA_CONTROLLER_CONSTRAINTS);
+        thetaController.enableContinuousInput(-Math.PI, Math.PI);
+
+        SwerveControllerCommand swerveControllerCommand =
+            new SwerveControllerCommand(
+                pathTrajectory,
+                s_Drivetrain::getPose,
+                Constants.DriveTrain.SWERVE_KINEMATICS,
+                new PIDController(Constants.AutoConstants.KP_X_CONTROLLER, 0, 0),
+                new PIDController(Constants.AutoConstants.KP_Y_CONTROLLER, 0, 0),
+                thetaController,
+                s_Drivetrain::setModuleStates,
+                s_Drivetrain);
+
+        SwerveControllerCommand swerveControllerCommand1 =
+            new SwerveControllerCommand(
+                pathTrajectory1,
+                s_Drivetrain::getPose,
+                Constants.DriveTrain.SWERVE_KINEMATICS,
+                new PIDController(Constants.AutoConstants.KP_X_CONTROLLER, 0, 0),
+                new PIDController(Constants.AutoConstants.KP_Y_CONTROLLER, 0, 0),
+                thetaController,
+                s_Drivetrain::setModuleStates,
+                s_Drivetrain);
+
+        addCommands(
+            new LowerArmAuto(s_Climber),
+            new WaitCommand(1.5),
+            new InstantCommand(() -> s_Drivetrain.resetOdometry(pathTrajectory.getInitialPose())),
+            new ParallelCommandGroup(swerveControllerCommand,
+            new IntakeAuto(s_Intake, s_Climber)),
+            new AutoFireWithCheck(s_Drivetrain, s_LimeLight, s_Shooter, s_Intake),
+            new InstantCommand(() -> s_Shooter.hoodSetPosition(Constants.Shooter.NORMAL_RUN)),
+            new InstantCommand(() -> s_Shooter.stopShooter()),
+            new InstantCommand(() -> s_Drivetrain.resetOdometry(pathTrajectory1.getInitialPose())),
+            new ParallelCommandGroup(swerveControllerCommand1,
+            new IntakeAuto(s_Intake, s_Climber)),
+            new AutoFireWithCheck(s_Drivetrain, s_LimeLight, s_Shooter, s_Intake),
+            new InstantCommand(() -> s_Shooter.hoodSetPosition(Constants.Shooter.NORMAL_RUN)),
+            new InstantCommand(() -> s_Shooter.stopShooter())
+        );
+    }
+}

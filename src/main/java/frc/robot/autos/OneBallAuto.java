@@ -53,6 +53,7 @@ public class OneBallAuto extends SequentialCommandGroup {
                 s_Drivetrain);
 
         addCommands(
+            new LowerArmAuto(s_Climber),
             new InstantCommand(() -> s_Shooter.setFender()),
             new AutoStartUpFender(s_Climber, s_Shooter),
             new WaitCommand(0.375),
@@ -95,6 +96,7 @@ public class OneBallAuto extends SequentialCommandGroup {
                     s_Drivetrain);
 
             addCommands(
+                new LowerArmAuto(s_Climber),
                 new InstantCommand(() -> s_Shooter.setFender()),
                 new AutoStartUpFender(s_Climber, s_Shooter),
                 new WaitCommand(0.375),
@@ -135,6 +137,7 @@ public class OneBallAuto extends SequentialCommandGroup {
                     s_Drivetrain);
 
             addCommands(
+                new LowerArmAuto(s_Climber),
                 new InstantCommand(() -> s_Shooter.setFender()),
                 new AutoStartUpFender(s_Climber, s_Shooter),
                 new WaitCommand(0.375),
