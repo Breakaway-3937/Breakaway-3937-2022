@@ -34,8 +34,8 @@ public class TwoBallAuto extends SequentialCommandGroup {
         Trajectory pathTrajectory =
             TrajectoryGenerator.generateTrajectory(
                 List.of(new Pose2d(8.12, 2.73, Rotation2d.fromDegrees(73.61)), 
-                new Pose2d(7.72, 1.71, Rotation2d.fromDegrees(-90)),
-                new Pose2d(7.5, 0.71, Rotation2d.fromDegrees(-90)),
+                new Pose2d(7.72, 1.71, Rotation2d.fromDegrees(-90.0)),
+                new Pose2d(7.5, 0.71, Rotation2d.fromDegrees(-90.0)),
                 new Pose2d(7.22, 1.85, Rotation2d.fromDegrees(64.51))),
                 config);
               
