@@ -64,8 +64,8 @@ public class TwoBallAuto extends SequentialCommandGroup {
             new InstantCommand(() -> s_Shooter.hoodSetPosition(Constants.Shooter.NORMAL_RUN)),
             new InstantCommand(() -> s_Shooter.stopShooter()),
             new InstantCommand(() -> s_Drivetrain.resetOdometry(pathTrajectory.getInitialPose())),
-            new ParallelCommandGroup(swerveControllerCommand,
-            new IntakeAutoWithDelay(s_Intake, s_Climber)),
+            new ParallelCommandGroup(swerveControllerCommand),
+            //new IntakeAutoWithDelay(s_Intake, s_Climber)),
             new AutoFireWithCheck(s_Drivetrain, s_LimeLight, s_Shooter, s_Intake),
             new InstantCommand(() -> s_Shooter.stopShooter())
         );
