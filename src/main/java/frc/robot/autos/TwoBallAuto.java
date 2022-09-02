@@ -82,7 +82,7 @@ public class TwoBallAuto extends SequentialCommandGroup {
             Trajectory pathTrajectory = 
                 TrajectoryGenerator.generateTrajectory(
                     List.of(new Pose2d(7.58, 3.14, Rotation2d.fromDegrees(70.35)), 
-                    new Pose2d(6.78, 2.54, Rotation2d.fromDegrees(-139)),
+                    new Pose2d(6.78, 2.54, Rotation2d.fromDegrees(-139.0)),
                     new Pose2d(5.3, 2.12, Rotation2d.fromDegrees(-139.03)),
                     new Pose2d(6.72, 2.05, Rotation2d.fromDegrees(41.82))),
                     config);
@@ -128,9 +128,9 @@ public class TwoBallAuto extends SequentialCommandGroup {
             Trajectory pathTrajectory = 
                 TrajectoryGenerator.generateTrajectory(
                     List.of(new Pose2d(7.15, 4.89, Rotation2d.fromDegrees(-20.43)), 
-                    new Pose2d(6.36, 5.62, Rotation2d.fromDegrees(153)),
+                    new Pose2d(6.36, 5.62, Rotation2d.fromDegrees(153.0)),
                     new Pose2d(5.08, 6.14, Rotation2d.fromDegrees(145.30)),
-                    new Pose2d(6.19, 5.58, Rotation2d.fromDegrees(-45))),
+                    new Pose2d(6.19, 5.58, Rotation2d.fromDegrees(-45.0))),
                     config);
                       
                 var thetaController =
