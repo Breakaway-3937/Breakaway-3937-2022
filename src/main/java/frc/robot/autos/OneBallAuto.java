@@ -33,7 +33,7 @@ public class OneBallAuto extends SequentialCommandGroup {
         Trajectory pathTrajectory =
             TrajectoryGenerator.generateTrajectory(
                 List.of(new Pose2d(8.01, 2.32, Rotation2d.fromDegrees(90)), 
-                new Pose2d(8.01, 0.52, Rotation2d.fromDegrees(-90))),
+                new Pose2d(9.08, 0.48, Rotation2d.fromDegrees(91.07))),
                 config);
               
             var thetaController =
@@ -61,7 +61,8 @@ public class OneBallAuto extends SequentialCommandGroup {
             new InstantCommand(() -> s_Shooter.hoodSetPosition(Constants.Shooter.NORMAL_RUN)),
             new InstantCommand(() -> s_Shooter.stopShooter()),
             new InstantCommand(() -> s_Drivetrain.resetOdometry(pathTrajectory.getInitialPose())),
-            swerveControllerCommand
+            swerveControllerCommand,
+            new InstantCommand(() -> System.out.println("Good"))
         );
     }
 
