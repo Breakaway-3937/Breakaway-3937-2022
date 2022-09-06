@@ -35,15 +35,19 @@ public class ThreeBallAuto2910 extends SequentialCommandGroup {
             TrajectoryGenerator.generateTrajectory(
                 List.of(new Pose2d(7.48, 1.74, Rotation2d.fromDegrees(-90)), 
                 new Pose2d(7.59, 0.64, Rotation2d.fromDegrees(-91.25)),
-                new Pose2d(6.36, 0.71, Rotation2d.fromDegrees(178.03)),
-                new Pose2d(3.79, 0.69, Rotation2d.fromDegrees(38)),
-                new Pose2d(3.99, 1.34, Rotation2d.fromDegrees(38.88))),
+                new Pose2d(6.36, 0.71, Rotation2d.fromDegrees(178.03))),
                 config);
 
         Trajectory pathTrajectory1 =
             TrajectoryGenerator.generateTrajectory(
                 List.of(new Pose2d(3.99, 1.34, Rotation2d.fromDegrees(38.88)), 
                 new Pose2d(5.19, 2.01, Rotation2d.fromDegrees(42.14))),
+                config);
+
+        Trajectory pathTrajectory2 =
+            TrajectoryGenerator.generateTrajectory(
+                List.of(new Pose2d(3.79, 0.69, Rotation2d.fromDegrees(38)),
+                new Pose2d(3.99, 1.34, Rotation2d.fromDegrees(38.88))),
                 config);
               
             var thetaController =
@@ -73,11 +77,22 @@ public class ThreeBallAuto2910 extends SequentialCommandGroup {
                 s_Drivetrain::setModuleStates,
                 s_Drivetrain);
 
+        SwerveControllerCommand swerveControllerCommand2 =
+            new SwerveControllerCommand(
+                pathTrajectory2,
+                s_Drivetrain::getPose,
+                Constants.DriveTrain.SWERVE_KINEMATICS,
+                new PIDController(Constants.AutoConstants.KP_X_CONTROLLER, 0, 0),
+                new PIDController(Constants.AutoConstants.KP_Y_CONTROLLER, 0, 0),
+                thetaController,
+                s_Drivetrain::setModuleStates,
+                s_Drivetrain);
+
         addCommands(
             new LowerArmAuto(s_Climber),
             new WaitCommand(1.5),
             new InstantCommand(() -> s_Drivetrain.resetOdometry(pathTrajectory.getInitialPose())),
-            new ParallelCommandGroup(swerveControllerCommand,
+            new ParallelCommandGroup(new SequentialCommandGroup(swerveControllerCommand, swerveControllerCommand2),
             new IntakeAuto(s_Intake, s_Climber)),
             new AutoFireWithCheck(s_Drivetrain, s_LimeLight, s_Shooter, s_Intake),
             new InstantCommand(() -> s_Shooter.hoodSetPosition(Constants.Shooter.NORMAL_RUN)),

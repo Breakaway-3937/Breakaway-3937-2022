@@ -40,16 +40,21 @@ public class HideAndSeek extends SequentialCommandGroup {
             TrajectoryGenerator.generateTrajectory(
                 List.of(new Pose2d(5.16, 5.03, Rotation2d.fromDegrees(-59.04)), 
                 new Pose2d(4.87, 4.17, Rotation2d.fromDegrees(-109.8)),
-                new Pose2d(4.53, 3.32, Rotation2d.fromDegrees(-106.09)),
-                new Pose2d(5.24, 5.02, Rotation2d.fromDegrees(68.5)),
-                new Pose2d(5.51, 6.01, Rotation2d.fromDegrees(57.62)),
-                new Pose2d(5.98, 7.09, Rotation2d.fromDegrees(51.77))),
+                new Pose2d(4.53, 3.32, Rotation2d.fromDegrees(-106.09))),
                 config);
 
         Trajectory pathTrajectory1 =
             TrajectoryGenerator.generateTrajectory(
                 List.of(new Pose2d(5.98, 7.09, Rotation2d.fromDegrees(51.77)), 
                 new Pose2d(6.21, 5.72, Rotation2d.fromDegrees(-47.07))),
+                config);
+
+
+        Trajectory pathTrajectory2 =
+            TrajectoryGenerator.generateTrajectory(
+                List.of(new Pose2d(5.24, 5.02, Rotation2d.fromDegrees(68.5)),
+                new Pose2d(5.51, 6.01, Rotation2d.fromDegrees(57.62)),
+                new Pose2d(5.98, 7.09, Rotation2d.fromDegrees(51.77))),
                 config);
               
             var thetaController =
@@ -79,12 +84,23 @@ public class HideAndSeek extends SequentialCommandGroup {
                 s_DriveTrain::setModuleStates,
                 s_DriveTrain);
 
+        SwerveControllerCommand swerveControllerCommand2 =
+            new SwerveControllerCommand(
+                pathTrajectory2,
+                s_DriveTrain::getPose,
+                Constants.DriveTrain.SWERVE_KINEMATICS,
+                new PIDController(Constants.AutoConstants.KP_X_CONTROLLER, 0, 0),
+                new PIDController(Constants.AutoConstants.KP_Y_CONTROLLER, 0, 0),
+                thetaController,
+                s_DriveTrain::setModuleStates,
+                s_DriveTrain);
+
 
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new TwoBallAutoThree(s_DriveTrain, s_Climber, s_Shooter, s_Intake, s_LimeLight),
-      new ParallelCommandGroup(swerveControllerCommand,
+      new ParallelCommandGroup(new SequentialCommandGroup(swerveControllerCommand, swerveControllerCommand2),
       new IntakeAuto(s_Intake, s_Climber)),
       swerveControllerCommand1,
       new SpitAuto(s_Climber, s_Intake)
