@@ -66,19 +66,16 @@ public class RobotContainer {
   /* Autos */
   private final DoNothing a_DoNothing = new DoNothing(s_Climber);
   private final LeaveTarmac a_LeaveTarmac = new LeaveTarmac(s_DriveTrain, s_Climber);
-  private final OneBallAuto a_OneBallAuto = new OneBallAuto(s_DriveTrain, s_LimeLight, s_Shooter, s_Intake, s_Climber, "OneBallAuto");
-  private final OneBallAuto a_OneBallAutoOne = new OneBallAuto(s_DriveTrain, s_LimeLight, s_Shooter, s_Intake, s_Climber, "OneBallAutoOne");
-  private final OneBallAuto a_OneBallAutoTwo = new OneBallAuto(s_DriveTrain, s_LimeLight, s_Shooter, s_Intake, s_Climber, "OneBallAutoTwo");
-  private final TwoBallAuto a_TwoBallAuto = new TwoBallAuto(s_DriveTrain, s_LimeLight, s_Shooter, s_Intake, s_Climber, "TwoBallAuto");
-  private final TwoBallAuto a_TwoBallAutoOne = new TwoBallAuto(s_DriveTrain, s_LimeLight, s_Shooter, s_Intake, s_Climber, "TwoBallAutoOne");
-  private final TwoBallAuto a_TwoBallAutoTwo = new TwoBallAuto(s_DriveTrain, s_LimeLight, s_Shooter, s_Intake, s_Climber, "TwoBallAutoTwo");
-  private final TwoBallAutoThree a_TwoBallAutoThree = new TwoBallAutoThree(s_Climber, s_Intake, s_DriveTrain, s_LimeLight, s_Shooter);
-  private final ThreeBallAuto2910 a_ThreeBallAuto2910 = new ThreeBallAuto2910(s_DriveTrain, s_Intake, s_Climber, s_Shooter, s_LimeLight);
-  private final ThreeBallAuto a_ThreeBallAuto = new ThreeBallAuto(s_DriveTrain, s_LimeLight, s_Shooter, s_Intake, s_Climber);
-  private final FiveBallAuto a_FiveBallAuto = new FiveBallAuto(s_DriveTrain, s_LimeLight, s_Shooter, s_Intake, s_Climber);
+  private final OneBallAuto a_OneBallAuto = new OneBallAuto(s_DriveTrain, s_Climber, s_Shooter, s_Intake);
+  private final OneBallAuto a_OneBallAutoOne = new OneBallAuto(s_DriveTrain, s_Climber, s_Shooter, s_Intake, 1);
+  private final OneBallAuto a_OneBallAutoTwo = new OneBallAuto(s_DriveTrain, s_Climber, s_Shooter, s_Intake, 2);
+  private final TwoBallAuto a_TwoBallAuto = new TwoBallAuto(s_DriveTrain, s_Climber, s_Shooter, s_Intake, s_LimeLight);
+  private final TwoBallAuto a_TwoBallAutoOne = new TwoBallAuto(s_DriveTrain, s_Climber, s_Shooter, s_Intake, s_LimeLight, 1);
+  private final TwoBallAuto a_TwoBallAutoTwo = new TwoBallAuto(s_DriveTrain, s_Climber, s_Shooter, s_Intake, s_LimeLight, 2);
+  private final TwoBallAutoThree a_TwoBallAutoThree = new TwoBallAutoThree(s_DriveTrain, s_Climber, s_Shooter,  s_Intake, s_LimeLight);
+  private final ThreeBallAuto2910 a_ThreeBallAuto2910 = new ThreeBallAuto2910(s_DriveTrain, s_Climber, s_Shooter,  s_Intake, s_LimeLight);
   private final FiveBallAuto2910 a_FiveBallAuto2910 = new FiveBallAuto2910(s_DriveTrain, s_Intake, s_Climber, s_Shooter, s_LimeLight);
   private final HideAndSeek a_HideAndSeek = new HideAndSeek(s_DriveTrain, s_Intake, s_LimeLight, s_Climber, s_Shooter);
-  private final FiveBallAuto3937 a_FiveBallAuto3937 = new FiveBallAuto3937(s_Climber, s_Intake, s_DriveTrain, s_LimeLight, s_Shooter);
   
   /* Commands */
   private final AutoTargetDetection c_AutoTargetDetection = new AutoTargetDetection(s_DriveTrain, s_LimeLight);
@@ -106,12 +103,9 @@ public class RobotContainer {
     s_Command.addOption("Two Ball One", a_TwoBallAutoOne);
     s_Command.addOption("Two Ball Two", a_TwoBallAutoTwo);
     s_Command.addOption("Two Ball Three", a_TwoBallAutoThree);
-    s_Command.addOption("Three Ball", a_ThreeBallAuto);
     s_Command.addOption("2910 Three Ball", a_ThreeBallAuto2910);
-    s_Command.addOption("Five Ball", a_FiveBallAuto);
     s_Command.addOption("2910 Five Ball", a_FiveBallAuto2910);
     s_Command.addOption("HideAndSeek", a_HideAndSeek);
-    s_Command.addOption("3937 Five Ball", a_FiveBallAuto3937);
     
     autoTab.add("Command Chooser", s_Command).withPosition(0, 0);
     
