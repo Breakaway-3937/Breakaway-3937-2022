@@ -14,7 +14,7 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -46,7 +46,8 @@ public class ThreeBallAuto2910 extends SequentialCommandGroup {
 
         Trajectory pathTrajectory2 =
             TrajectoryGenerator.generateTrajectory(
-                List.of(new Pose2d(3.79, 0.69, Rotation2d.fromDegrees(38)),
+                List.of(new Pose2d(6.36, 0.71, Rotation2d.fromDegrees(178.03)),
+                new Pose2d(3.79, 0.69, Rotation2d.fromDegrees(38)),
                 new Pose2d(3.99, 1.34, Rotation2d.fromDegrees(38.88))),
                 config);
               
@@ -92,13 +93,13 @@ public class ThreeBallAuto2910 extends SequentialCommandGroup {
             new LowerArmAuto(s_Climber),
             new WaitCommand(1.5),
             new InstantCommand(() -> s_Drivetrain.resetOdometry(pathTrajectory.getInitialPose())),
-            new ParallelCommandGroup(new SequentialCommandGroup(swerveControllerCommand, swerveControllerCommand2),
+            new ParallelRaceGroup(new SequentialCommandGroup(swerveControllerCommand, new InstantCommand(() -> s_Drivetrain.resetOdometry(pathTrajectory2.getInitialPose())), swerveControllerCommand2),
             new IntakeAuto(s_Intake, s_Climber)),
             new AutoFireWithCheck(s_Drivetrain, s_LimeLight, s_Shooter, s_Intake),
             new InstantCommand(() -> s_Shooter.hoodSetPosition(Constants.Shooter.NORMAL_RUN)),
             new InstantCommand(() -> s_Shooter.stopShooter()),
             new InstantCommand(() -> s_Drivetrain.resetOdometry(pathTrajectory1.getInitialPose())),
-            new ParallelCommandGroup(swerveControllerCommand1,
+            new ParallelRaceGroup(swerveControllerCommand1,
             new IntakeAuto(s_Intake, s_Climber)),
             new AutoFireWithCheck(s_Drivetrain, s_LimeLight, s_Shooter, s_Intake),
             new InstantCommand(() -> s_Shooter.hoodSetPosition(Constants.Shooter.NORMAL_RUN)),

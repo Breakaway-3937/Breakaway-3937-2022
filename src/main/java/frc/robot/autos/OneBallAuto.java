@@ -61,8 +61,7 @@ public class OneBallAuto extends SequentialCommandGroup {
             new InstantCommand(() -> s_Shooter.hoodSetPosition(Constants.Shooter.NORMAL_RUN)),
             new InstantCommand(() -> s_Shooter.stopShooter()),
             new InstantCommand(() -> s_Drivetrain.resetOdometry(pathTrajectory.getInitialPose())),
-            swerveControllerCommand,
-            new InstantCommand(() -> System.out.println("Good"))
+            swerveControllerCommand
         );
     }
 

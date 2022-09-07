@@ -14,7 +14,7 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import frc.robot.Constants;
@@ -78,7 +78,7 @@ public class FiveBallAuto2910 extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new ThreeBallAuto2910(s_DriveTrain, s_Climber, s_Shooter, s_Intake, s_LimeLight),
-      new ParallelCommandGroup(swerveControllerCommand,
+      new ParallelRaceGroup(swerveControllerCommand,
       new IntakeAuto(s_Intake, s_Climber)),
       new IntakeAutoWithPause(s_Intake, s_Climber),
       swerveControllerCommand1,

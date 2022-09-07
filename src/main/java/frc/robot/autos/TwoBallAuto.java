@@ -14,7 +14,7 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -40,7 +40,8 @@ public class TwoBallAuto extends SequentialCommandGroup {
 
         Trajectory pathTrajectory1 =
             TrajectoryGenerator.generateTrajectory(
-                List.of(new Pose2d(7.22, 1.85, Rotation2d.fromDegrees(64.51))), 
+                List.of(new Pose2d(7.5, 0.71, Rotation2d.fromDegrees(-90.0)),
+                new Pose2d(7.22, 1.85, Rotation2d.fromDegrees(64.51))), 
                 config);
               
             var thetaController =
@@ -79,9 +80,8 @@ public class TwoBallAuto extends SequentialCommandGroup {
             new InstantCommand(() -> s_Shooter.hoodSetPosition(Constants.Shooter.NORMAL_RUN)),
             new InstantCommand(() -> s_Shooter.stopShooter()),
             new InstantCommand(() -> s_Drivetrain.resetOdometry(pathTrajectory.getInitialPose())),
-            new ParallelCommandGroup(swerveControllerCommand,
+            new ParallelRaceGroup(new SequentialCommandGroup(swerveControllerCommand, new InstantCommand(() -> s_Drivetrain.resetOdometry(pathTrajectory1.getInitialPose())), new ParallelRaceGroup(swerveControllerCommand1, new WaitCommand(2))),
             new IntakeAutoWithDelay(s_Intake, s_Climber)),
-            swerveControllerCommand1,
             new AutoFireWithCheck(s_Drivetrain, s_LimeLight, s_Shooter, s_Intake),
             new InstantCommand(() -> s_Shooter.stopShooter())
         );
@@ -104,7 +104,8 @@ public class TwoBallAuto extends SequentialCommandGroup {
             
             Trajectory pathTrajectory1 = 
                 TrajectoryGenerator.generateTrajectory(
-                    List.of(new Pose2d(6.72, 2.05, Rotation2d.fromDegrees(41.82))),
+                    List.of(new Pose2d(5.3, 2.12, Rotation2d.fromDegrees(-139.03)),
+                    new Pose2d(6.72, 2.05, Rotation2d.fromDegrees(41.82))),
                     config);
                       
                 var thetaController =
@@ -143,9 +144,8 @@ public class TwoBallAuto extends SequentialCommandGroup {
                 new InstantCommand(() -> s_Shooter.hoodSetPosition(Constants.Shooter.NORMAL_RUN)),
                 new InstantCommand(() -> s_Shooter.stopShooter()),
                 new InstantCommand(() -> s_Drivetrain.resetOdometry(pathTrajectory.getInitialPose())),
-                new ParallelCommandGroup(swerveControllerCommand,
+                new ParallelRaceGroup(new SequentialCommandGroup(swerveControllerCommand, new InstantCommand(() -> s_Drivetrain.resetOdometry(pathTrajectory1.getInitialPose())), new ParallelRaceGroup(swerveControllerCommand1, new WaitCommand(2))),
                 new IntakeAutoWithDelay(s_Intake, s_Climber)),
-                swerveControllerCommand1,
                 new AutoFireWithCheck(s_Drivetrain, s_LimeLight, s_Shooter, s_Intake),
                 new InstantCommand(() -> s_Shooter.stopShooter())
             );
@@ -166,7 +166,8 @@ public class TwoBallAuto extends SequentialCommandGroup {
 
             Trajectory pathTrajectory1 = 
                 TrajectoryGenerator.generateTrajectory(
-                    List.of(new Pose2d(6.19, 5.58, Rotation2d.fromDegrees(-45.0))),
+                    List.of(new Pose2d(5.08, 6.14, Rotation2d.fromDegrees(145.30)),
+                    new Pose2d(6.19, 5.58, Rotation2d.fromDegrees(-45.0))),
                     config);
                       
                 var thetaController =
@@ -205,9 +206,8 @@ public class TwoBallAuto extends SequentialCommandGroup {
                 new InstantCommand(() -> s_Shooter.hoodSetPosition(Constants.Shooter.NORMAL_RUN)),
                 new InstantCommand(() -> s_Shooter.stopShooter()),
                 new InstantCommand(() -> s_Drivetrain.resetOdometry(pathTrajectory.getInitialPose())),
-                new ParallelCommandGroup(swerveControllerCommand,
+                new ParallelRaceGroup(new SequentialCommandGroup(swerveControllerCommand, new InstantCommand(() -> s_Drivetrain.resetOdometry(pathTrajectory1.getInitialPose())), new ParallelRaceGroup(swerveControllerCommand1, new WaitCommand(2))),
                 new IntakeAutoWithDelay(s_Intake, s_Climber)),
-                swerveControllerCommand1,
                 new AutoFireWithCheck(s_Drivetrain, s_LimeLight, s_Shooter, s_Intake),
                 new InstantCommand(() -> s_Shooter.stopShooter())
             );

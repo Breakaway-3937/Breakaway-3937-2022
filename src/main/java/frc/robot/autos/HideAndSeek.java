@@ -13,7 +13,8 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import frc.robot.Constants;
@@ -52,8 +53,15 @@ public class HideAndSeek extends SequentialCommandGroup {
 
         Trajectory pathTrajectory2 =
             TrajectoryGenerator.generateTrajectory(
-                List.of(new Pose2d(5.24, 5.02, Rotation2d.fromDegrees(68.5)),
+                List.of(new Pose2d(4.53, 3.32, Rotation2d.fromDegrees(-106.09)),
+                new Pose2d(5.24, 5.02, Rotation2d.fromDegrees(68.5)),
                 new Pose2d(5.51, 6.01, Rotation2d.fromDegrees(57.62)),
+                new Pose2d(5.98, 7.09, Rotation2d.fromDegrees(51.77))),
+                config);
+
+        Trajectory pathTrajectory3 =
+            TrajectoryGenerator.generateTrajectory(
+                List.of(new Pose2d(5.51, 6.01, Rotation2d.fromDegrees(57.62)),
                 new Pose2d(5.98, 7.09, Rotation2d.fromDegrees(51.77))),
                 config);
               
@@ -95,13 +103,26 @@ public class HideAndSeek extends SequentialCommandGroup {
                 s_DriveTrain::setModuleStates,
                 s_DriveTrain);
 
+        SwerveControllerCommand swerveControllerCommand3 =
+            new SwerveControllerCommand(
+                pathTrajectory3,
+                s_DriveTrain::getPose,
+                Constants.DriveTrain.SWERVE_KINEMATICS,
+                new PIDController(Constants.AutoConstants.KP_X_CONTROLLER, 0, 0),
+                new PIDController(Constants.AutoConstants.KP_Y_CONTROLLER, 0, 0),
+                thetaController,
+                s_DriveTrain::setModuleStates,
+                s_DriveTrain);
+
 
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new TwoBallAutoThree(s_DriveTrain, s_Climber, s_Shooter, s_Intake, s_LimeLight),
-      new ParallelCommandGroup(new SequentialCommandGroup(swerveControllerCommand, swerveControllerCommand2),
+      new InstantCommand(() -> s_DriveTrain.resetOdometry(pathTrajectory.getInitialPose())),
+      new ParallelRaceGroup(new SequentialCommandGroup(swerveControllerCommand, new InstantCommand(() -> s_DriveTrain.resetOdometry(pathTrajectory2.getInitialPose())), swerveControllerCommand2, new InstantCommand(() -> s_DriveTrain.resetOdometry(pathTrajectory3.getInitialPose())), swerveControllerCommand3),
       new IntakeAuto(s_Intake, s_Climber)),
+      new InstantCommand(() -> s_DriveTrain.resetOdometry(pathTrajectory1.getInitialPose())),
       swerveControllerCommand1,
       new SpitAuto(s_Climber, s_Intake)
       );
