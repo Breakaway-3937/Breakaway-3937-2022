@@ -34,14 +34,15 @@ public class TwoBallAutoThree extends SequentialCommandGroup {
         Trajectory pathTrajectory =
             TrajectoryGenerator.generateTrajectory(
                 List.of(new Pose2d(6.11, 5.17, Rotation2d.fromDegrees(138.65)), 
-                new Pose2d(4.50, 6.69, Rotation2d.fromDegrees(145.01)),
-                new Pose2d(5.1, 5.63, Rotation2d.fromDegrees(-16.86))),
+                new Pose2d(5.10, 6.21, Rotation2d.fromDegrees(144.04)),
+                new Pose2d(4.50, 6.69, Rotation2d.fromDegrees(145.01))),
                 config);
 
         Trajectory pathTrajectory1 =
             TrajectoryGenerator.generateTrajectory(
-                List.of(new Pose2d(5.16, 5.03, Rotation2d.fromDegrees(-59.04)),
-                new Pose2d(5.16, 5.04, Rotation2d.fromDegrees(-59.04))),
+                List.of(new Pose2d(4.50, 6.69, Rotation2d.fromDegrees(145.01)),
+                new Pose2d(5.1, 5.63, Rotation2d.fromDegrees(-16.86)),
+                new Pose2d(5.16, 5.03, Rotation2d.fromDegrees(-59.04))),
                 config);
               
             var thetaController =
