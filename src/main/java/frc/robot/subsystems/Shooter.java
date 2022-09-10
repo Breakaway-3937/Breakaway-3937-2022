@@ -60,7 +60,7 @@ public class Shooter extends SubsystemBase {
     tableHoodEncoder = Shuffleboard.getTab("Shooter").add("Encoder", currentPosition).withPosition(0, 0).getEntry();
     tableShooterVelocity = Shuffleboard.getTab("Shooter").add("Velocity", shooterVelocity).withPosition(1, 0).getEntry();
     hoodOffsetLimeLight = Shuffleboard.getTab("Shooter").add("Hood Offset LimeLight", -3).withPosition(2, 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -50, "max", 50)).getEntry();
-    shooterOffsetLimeLight = Shuffleboard.getTab("Shooter").add("Shooter Offset LimeLight", -85).withPosition(4, 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -500, "max", 500)).getEntry();
+    shooterOffsetLimeLight = Shuffleboard.getTab("Shooter").add("Shooter Offset LimeLight", -120).withPosition(4, 0).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -500, "max", 500)).getEntry();
     hoodOffsetTarmac = Shuffleboard.getTab("Shooter").add("Hood Offset Tarmac", 0).withPosition(0, 1).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -50, "max", 50)).getEntry();
     shooterOffsetTarmac = Shuffleboard.getTab("Shooter").add("Shooter Offset Tarmac", 0).withPosition(2, 1).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -500, "max", 500)).getEntry();
     hoodOffsetFender = Shuffleboard.getTab("Shooter").add("Hood Offset Fender", 0).withPosition(0, 2).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -50, "max", 50)).getEntry();
