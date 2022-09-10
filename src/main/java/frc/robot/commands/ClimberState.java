@@ -145,7 +145,7 @@ public class ClimberState extends CommandBase {
           readyForNextState = true;
         }
         break;
-        case 2:  if(s_Climber.currentPositionStageOne > 79) {
+        case 2:  if(s_Climber.currentPositionStageOne > 78) {
           readyForNextState = true;  
         }
         break;
@@ -172,7 +172,7 @@ public class ClimberState extends CommandBase {
         }
         break;  
         case 5:
-        case 9: if(s_Climber.currentPositionStageOne > 79) {
+        case 9: if(s_Climber.currentPositionStageOne > 78) {
           nextState++; 
         }
         break;
