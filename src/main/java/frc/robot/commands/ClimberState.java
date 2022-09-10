@@ -145,11 +145,11 @@ public class ClimberState extends CommandBase {
           readyForNextState = true;
         }
         break;
-        case 2:  if(s_Climber.currentPositionStageOne > 79.5) {
+        case 2:  if(s_Climber.currentPositionStageOne > 79) {
           readyForNextState = true;  
         }
         break;
-        case 3: if(s_Climber.currentPositionStageOne < 1 && s_Climber.currentPositionStageOne > 0){
+        case 3: if(s_Climber.currentPositionStageOne < 1.5 && s_Climber.currentPositionStageOne > 0){
           s_Climber.engage("stageOnePneu");
           s_Climber.stopStageOne();      
           readyForNextState = true;  
@@ -172,7 +172,7 @@ public class ClimberState extends CommandBase {
         }
         break;  
         case 5:
-        case 9: if(s_Climber.currentPositionStageOne > 79.5) {
+        case 9: if(s_Climber.currentPositionStageOne > 79) {
           nextState++; 
         }
         break;
