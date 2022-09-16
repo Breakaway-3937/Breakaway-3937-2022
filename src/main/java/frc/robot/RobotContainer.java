@@ -110,10 +110,10 @@ public class RobotContainer {
     autoTab.add("Command Chooser", s_Command).withPosition(0, 0);
     
     s_Shooter.hoodSetPosition(Constants.Shooter.NORMAL_RUN);
-    s_DriveTrain.setDefaultCommand(new TeleopSwerve(s_DriveTrain, translationController, rotationController, translationAxis, strafeAxis, rotationAxis, fieldRelative, openLoop));
+    /*s_DriveTrain.setDefaultCommand(new TeleopSwerve(s_DriveTrain, translationController, rotationController, translationAxis, strafeAxis, rotationAxis, fieldRelative, openLoop));
     s_Shooter.setDefaultCommand(new StartShooter(s_Shooter, xboxController));
     s_Intake.setDefaultCommand(new RunIntake(s_Intake, xboxController));
-    s_Climber.setDefaultCommand(new ClimberState(s_Climber, xboxController));
+    s_Climber.setDefaultCommand(new ClimberState(s_Climber, xboxController));*/
 
     // Configure the button bindings
     configureButtonBindings();
@@ -139,7 +139,7 @@ public class RobotContainer {
     rightTrigger.whenPressed(c_FireShooter)
                 .whenReleased(new InstantCommand(() -> c_FireShooter.cancel()));
 
-    aButton.whenPressed(new InstantCommand(() -> s_LimeLight.turnLightOn()));
+    aButton.whenPressed(new InstantCommand(() -> s_DriveTrain.music()));
             
   } 
 

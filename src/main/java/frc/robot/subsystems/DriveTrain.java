@@ -2,6 +2,9 @@ package frc.robot.subsystems;
 
 
 
+import java.util.List;
+
+import com.ctre.phoenix.music.Orchestra;
 import com.ctre.phoenix.sensors.PigeonIMU;
 
 import frc.robot.Constants;
@@ -104,6 +107,13 @@ public class DriveTrain extends SubsystemBase {
         double[] ypr = new double[3];
         gyro.getYawPitchRoll(ypr);
         return (Constants.DriveTrain.INVERT_GYRO) ? Rotation2d.fromDegrees(360 - ypr[0]) : Rotation2d.fromDegrees(ypr[0]);
+    }
+
+
+    public void music(){
+        Orchestra orc = new Orchestra(List.of(mSwerveMods[0].mAngleMotor, mSwerveMods[0].mDriveMotor, mSwerveMods[1].mAngleMotor, mSwerveMods[1].mDriveMotor, mSwerveMods[2].mAngleMotor, mSwerveMods[2].mDriveMotor, mSwerveMods[3].mAngleMotor, mSwerveMods[3].mDriveMotor), "ftp://roborio-3937-frc.local/home/lvuser/deploy/WeAreCoachJones'Slaves.chrp");
+        orc.loadMusic("WeAreCoachJones'Slaves.chrp");
+        orc.play();
     }
 
     @Override
