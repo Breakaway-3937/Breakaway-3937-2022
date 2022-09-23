@@ -14,8 +14,8 @@ import frc.lib.util.SwerveModuleConstants;
 public final class Constants {
     public static final boolean FIELD_RELATIVE = true;
     public static final boolean OPEN_LOOP = true;
-    public static final boolean COMP_BOT = true;
-    public static final boolean AUTO_LOG = false;
+
+    public static final int BLINKIN_LED_DRIVER = 0;
 
     public static final class Controllers{
         public static final GenericHID TRANSLATION_CONTROLLER = new GenericHID(0);
@@ -29,8 +29,6 @@ public final class Constants {
         public static final int XBOXCONTROLLER_RB_BUTTON = 6;
         public static final int XBOXCONTROLLER_BACK_BUTTON = 7;
         public static final int XBOXCONTROLLER_START_BUTTON = 8;
-        public static final int XBOX_CONTROLLER_LEFT_TRIGGER = 2;
-        public static final int XBOX_CONTROLLER_RIGHT_TRIGGER = 3;
         public static final double STICK_DEADBAND = 0.1;
         public static final int TRANSLATION_BUTTON = 1;
         public static final int ROTATION_BUTTON = 1;
@@ -110,10 +108,9 @@ public final class Constants {
             public static final int DRIVE_MOTOR_ID = 10;
             public static final int ANGLE_MOTOR_ID = 11;
             public static final int CANCODER_ID = 12;
-            public static final double ANGLE_OFFSET_COMP = 72.3339 + 180.0;
-            public static final double ANGLE_OFFSET_PRACTICE = 238.1835 + 180.0;
+            public static final double ANGLE_OFFSET = 238.1835 + 180.0;
             public static final SwerveModuleConstants CONSTANTS = 
-                new SwerveModuleConstants(DRIVE_MOTOR_ID, ANGLE_MOTOR_ID, CANCODER_ID, ANGLE_OFFSET_PRACTICE, ANGLE_OFFSET_COMP);
+                new SwerveModuleConstants(DRIVE_MOTOR_ID, ANGLE_MOTOR_ID, CANCODER_ID, ANGLE_OFFSET);
         }
 
         /* Front Right Module - Module 1 */
@@ -121,10 +118,9 @@ public final class Constants {
             public static final int DRIVE_MOTOR_ID = 1;
             public static final int ANGLE_MOTOR_ID = 2;
             public static final int CANCODER_ID = 3;
-            public static final double ANGLE_OFFSET_COMP = 138.8671 + 180.0;
-            public static final double ANGLE_OFFSET_PRACTICE = 202.9 + 180.0;
+            public static final double ANGLE_OFFSET = 202.9 + 180.0;
             public static final SwerveModuleConstants CONSTANTS = 
-                new SwerveModuleConstants(DRIVE_MOTOR_ID, ANGLE_MOTOR_ID, CANCODER_ID, ANGLE_OFFSET_PRACTICE, ANGLE_OFFSET_COMP);
+                new SwerveModuleConstants(DRIVE_MOTOR_ID, ANGLE_MOTOR_ID, CANCODER_ID, ANGLE_OFFSET);
         }
         
         /* Back Left Module - Module 2 */
@@ -134,10 +130,9 @@ public final class Constants {
             public static final int CANCODER_ID = 9;
             //public static final double ANGLE_OFFSET_COMP = -148.2715 + 180.0;
             //public static final double ANGLE_OFFSET_COMP = -112.2364 + 180.0;
-            public static final double ANGLE_OFFSET_COMP = 144.0527 + 180.0;
-            public static final double ANGLE_OFFSET_PRACTICE = 7.4 + 180.0;
+            public static final double ANGLE_OFFSET = 7.4 + 180.0;
             public static final SwerveModuleConstants CONSTANTS = 
-                new SwerveModuleConstants(DRIVE_MOTOR_ID, ANGLE_MOTOR_ID, CANCODER_ID, ANGLE_OFFSET_PRACTICE, ANGLE_OFFSET_COMP);
+                new SwerveModuleConstants(DRIVE_MOTOR_ID, ANGLE_MOTOR_ID, CANCODER_ID, ANGLE_OFFSET);
         }
 
         /* Back Right Module - Module 3 */
@@ -145,10 +140,9 @@ public final class Constants {
             public static final int DRIVE_MOTOR_ID = 4;
             public static final int ANGLE_MOTOR_ID = 5;
             public static final int CANCODER_ID = 6;
-            public static final double ANGLE_OFFSET_COMP = 39.2871 + 180.0;
-            public static final double ANGLE_OFFSET_PRACTICE = 181.2304 + 180.0;
+            public static final double ANGLE_OFFSET = 181.2304 + 180.0;
             public static final SwerveModuleConstants CONSTANTS = 
-                new SwerveModuleConstants(DRIVE_MOTOR_ID, ANGLE_MOTOR_ID, CANCODER_ID, ANGLE_OFFSET_PRACTICE, ANGLE_OFFSET_COMP);
+                new SwerveModuleConstants(DRIVE_MOTOR_ID, ANGLE_MOTOR_ID, CANCODER_ID, ANGLE_OFFSET);
         }
 
     }
@@ -169,91 +163,6 @@ public final class Constants {
                 KMAX_ANGULAR_SPEED_RADIANS_PER_SECOND, KMAX_ANGULAR_SPEED_RADIANS_PER_SECOND_SQUARED);
     }
 
-    public static final class Shooter {
-        //Shooter
-        public static final int SHOOTER_MOTOR_ID = 30;
-        public static final int HOOD_MOTOR_ID = 15;
-        public static final double SHOOTER_KPEAK_OUTPUT = 1;
-        public static final boolean SHOOTER_MOTOR_INVERT = true;
-        public static final NeutralMode SHOOTER_NEUTRAL_MODE = NeutralMode.Coast;
-        public static final int KPID_LOOP_IDX = 0;
-        public static final int KTIMEOUT_MS = 30;
-        public static final double SHOOTER_KP = 0; 
-        public static final double SHOOTER_KI = 0;
-        public static final double SHOOTER_KD = 0; 
-        public static final double SHOOTER_KIZ = 0; 
-        public static final double SHOOTER_KFF_PRACTICE = 0.066;
-        public static final double SHOOTER_KFF_COMP = 0.0655;
-        public static final double SHOOTER_KMAX_OUTPUT = 1; 
-        public static final double SHOOTER_KMIN_OUTPUT = 0;
-        public static final double MAX_RPM = 5700;
-        public static final double EDGE_OF_TARMAC_VELOCITY = 2480; 
-        public static final double FENDER_VELOCITY = 2590;
-        public static final double LAUNCH_PAD_VELOCITY = 2520;
-
-
-        //Hood
-        public static final double HOOD_KP = 0.1;
-        public static final double HOOD_KI = 0;
-        public static final double HOOD_KD = 0.5;
-        public static final double HOOD_KIZ = 0;
-        public static final double HOOD_KFF = 0;
-        public static final double HOOD_KMAX_OUTPUT = 1;
-        public static final double HOOD_KMIN_OUTPUT = -1;
-        public static final double EDGE_OF_TARMAC = 74;
-        public static final double NORMAL_RUN = 45;
-        public static final double FENDER = 33;
-        public static final double LAUNCH_PAD = 113;
-    }
-
-    public static final class Climber{
-        //Arm
-        public static final int RAISE_ARM_ID = 19;
-        public static final int STAGE_ONE_ID = 20;
-        public static final int STAGE_TWO_ID = 21;
-        public static final int PCM_DEVICE_ID = 22;
-        public static final double KP_RAISE_ARM = 0.0015;
-        public static final double KI_RAISE_ARM = 0;
-        public static final double KD_RAISE_ARM = 0;
-        public static final double KIZ_RAISE_ARM = 0;
-        public static final double KFF_RAISE_ARM = 0.0075;
-        public static final double KMAX_OUTPUT_RAISE_ARM = 1;
-        public static final double KMIN_OUTPUT_RAISE_ARM = -1;
-        public static final double MAX_VELOCITY_RAISE_ARM = 500;
-        public static final double MAX_ACCEL_RAISE_ARM = 350;
-        //Stage One
-        public static final double KP_STAGE_ONE_CLIMB = 0.00005;
-        public static final double KI_STAGE_ONE_CLIMB = 0;
-        public static final double KD_STAGE_ONE_CLIMB = 0;
-        public static final double KIZ_STAGE_ONE_CLIMB = 0;
-        public static final double KFF_STAGE_ONE_CLIMB = 0.0005;
-        public static final double KP_STAGE_ONE = 0.05;
-        public static final double KI_STAGE_ONE = 1e-6;
-        public static final double KD_STAGE_ONE = 0.5;
-        public static final double KIZ_STAGE_ONE = 0;
-        public static final double KFF_STAGE_ONE = 0;
-        public static final double KMAX_OUTPUT_STAGE_ONE = 1;
-        public static final double KMIN_OUTPUT_STAGE_ONE = -1;
-        public static final double MAX_VELOCITY_STAGE_ONE = 3500;
-        public static final double MAX_ACCEL_STAGE_ONE = 2750;
-        //Stage Two
-        public static final double KP_STAGE_TWO = 0;
-        public static final double KI_STAGE_TWO = 0;
-        public static final double KD_STAGE_TWO = 0;
-        public static final double KIZ_STAGE_TWO = 0;
-        public static final double KFF_STAGE_TWO = 0.0005;
-        public static final double KMAX_OUTPUT_STAGE_TWO = 1;
-        public static final double KMIN_OUTPUT_STAGE_TWO = -1;
-        public static final double MAX_VELOCITY_STAGE_TWO = 2500;
-        public static final double MAX_ACCEL_STAGE_TWO = 2000;
-    }
-
-    public static final class Intake{
-        public static final int INTAKE_MOTOR_ID = 16;
-        public static final int STAGING_MOTOR_ID = 17;
-        public static final int INDEX_MOTOR_ID = 18;
-    }
+    
 
 }
-
-// Branch Test 4
