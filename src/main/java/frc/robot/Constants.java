@@ -15,7 +15,7 @@ public final class Constants {
     public static final boolean FIELD_RELATIVE = true;
     public static final boolean OPEN_LOOP = true;
 
-    public static final int BLINKIN_LED_DRIVER = 0;
+    public static final int BLINKIN_LED_DRIVER = 9;
 
     public static final class Controllers{
         public static final GenericHID TRANSLATION_CONTROLLER = new GenericHID(0);

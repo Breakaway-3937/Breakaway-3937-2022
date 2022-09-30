@@ -25,7 +25,7 @@ import frc.robot.subsystems.*;
 /* All variables, objects, and methods declared in lowerCamelCase */
 
 public class RobotContainer {
-  private final Spark LED;
+  public final Spark LED;
   private final double initialLEDColor;
   /* Controllers */
   private final Joystick translationController = new Joystick(0);
@@ -42,6 +42,9 @@ public class RobotContainer {
   /* Driver Buttons */
   private final JoystickButton rotationButton = new JoystickButton(rotationController, Constants.Controllers.ROTATION_BUTTON);
   private final JoystickButton translationButton = new JoystickButton(translationController, Constants.Controllers.TRANSLATION_BUTTON);
+  private final JoystickButton xButton = new JoystickButton(xboxController, Constants.Controllers.XBOXCONTROLLER_X_BUTTON);
+  private final JoystickButton yButton = new JoystickButton(xboxController, Constants.Controllers.XBOXCONTROLLER_Y_BUTTON);
+  private final JoystickButton bButton = new JoystickButton(xboxController, Constants.Controllers.XBOXCONTROLLER_B_BUTTON);
 
 
   /* Subsystems */
@@ -50,10 +53,11 @@ public class RobotContainer {
   
   /* Commands */
   private final AutoTargetDetection c_AutoTargetDetection = new AutoTargetDetection(s_DriveTrain, s_LimeLight);
+  private final Speaker c_Speaker = new Speaker();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    initialLEDColor = Preferences.getDouble("InitialLEDColor", 0.99);
+    initialLEDColor = Preferences.getDouble("InitialLEDColor", -0.59);
     s_DriveTrain.setDefaultCommand(new TeleopSwerve(s_DriveTrain, translationController, rotationController, translationAxis, strafeAxis, rotationAxis, fieldRelative, openLoop));
     LED = new Spark(Constants.BLINKIN_LED_DRIVER);
     LED.set(initialLEDColor);
@@ -72,6 +76,9 @@ public class RobotContainer {
     translationButton.whenPressed(new InstantCommand(() -> s_DriveTrain.zeroGyro()));
     rotationButton.whenPressed(c_AutoTargetDetection)
                   .whenReleased(new InstantCommand(() -> c_AutoTargetDetection.cancel()));
+    xButton.whenPressed(c_Speaker);
+    yButton.cancelWhenPressed(c_Speaker);
+    bButton.whenPressed(new LEDChangeColor(LED, 0.93));
   } 
 
   /**
