@@ -32,17 +32,17 @@ public class SwerveModule {
         angleOffset = moduleConstants.angleOffset;
         
         /* Angle Encoder Config */
-        angleEncoder = new CANCoder(moduleConstants.cancoderID);
+        angleEncoder = new CANCoder(moduleConstants.cancoderID, "CANivore");
         configAngleEncoder();
         angleEncoder.setStatusFramePeriod(CANCoderStatusFrame.SensorData, 20);
         
         /* Angle Motor Config */
-        mAngleMotor = new TalonFX(moduleConstants.angleMotorID);
+        mAngleMotor = new TalonFX(moduleConstants.angleMotorID, "CANivore");
         configAngleMotor();
         mAngleMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_12_Feedback1, 20);
 
         /* Drive Motor Config */
-        mDriveMotor = new TalonFX(moduleConstants.driveMotorID);
+        mDriveMotor = new TalonFX(moduleConstants.driveMotorID, "CANivore");
         configDriveMotor();
         mAngleMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_12_Feedback1, 20);
 

@@ -7,6 +7,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.XboxController;
 import frc.lib.util.SwerveModuleConstants;
 
 /* Name All Variables in ALL_CAPS Format */
@@ -15,7 +16,10 @@ public final class Constants {
     public static final boolean FIELD_RELATIVE = true;
     public static final boolean OPEN_LOOP = true;
 
-    public static final int BLINKIN_LED_DRIVER = 9;
+    public static final int CANDLE_ID = 13;
+    public static final int INCREMENT_ANIM_BUTTON = XboxController.Button.kRightBumper.value;
+    public static final int DECREMENT_ANIM_BUTTON = XboxController.Button.kLeftBumper.value;
+    public static final int BLOCK_BUTTON = XboxController.Button.kStart.value;
 
     public static final class Controllers{
         public static final GenericHID TRANSLATION_CONTROLLER = new GenericHID(0);
