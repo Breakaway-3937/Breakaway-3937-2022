@@ -4,24 +4,23 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 
 import com.ctre.phoenix.led.*;
 import com.ctre.phoenix.led.CANdle.LEDStripType;
 import com.ctre.phoenix.led.CANdle.VBatOutputMode;
-import com.ctre.phoenix.led.ColorFlowAnimation.Direction;
-import com.ctre.phoenix.led.LarsonAnimation.BounceMode;
-import com.ctre.phoenix.led.TwinkleAnimation.TwinklePercent;
-import com.ctre.phoenix.led.TwinkleOffAnimation.TwinkleOffPercent;
+
 
 public class CANdleSystem extends SubsystemBase {
     private final CANdle candle = new CANdle(Constants.CANDLE_ID, "CANivore");
-    private final int ledCount = 300;
-    private XboxController xboxController;
+    //private final int ledCount = 300;
+    //private XboxController xboxController;
 
-    private Animation toAnimate = null;
+    //private Animation toAnimate = null;
 
     public enum AnimationTypes {
         ColorFlow,
@@ -35,11 +34,11 @@ public class CANdleSystem extends SubsystemBase {
         TwinkleOff,
         SetAll
     }
-    private AnimationTypes currentAnimation;
+    //private AnimationTypes currentAnimation;
 
     public CANdleSystem(XboxController xboxController) {
-        this.xboxController = xboxController;
-        changeAnimation(AnimationTypes.SetAll);
+        //this.xboxController = xboxController;
+        //changeAnimation(AnimationTypes.SetAll);
         CANdleConfiguration configAll = new CANdleConfiguration();
         configAll.statusLedOffWhenActive = true;
         configAll.disableWhenLOS = false;
@@ -49,7 +48,7 @@ public class CANdleSystem extends SubsystemBase {
         candle.configAllSettings(configAll, 100);
     }
 
-    public void incrementAnimation() {
+    /*public void incrementAnimation() {
         switch(currentAnimation) {
             case ColorFlow: changeAnimation(AnimationTypes.Fire); break;
             case Fire: changeAnimation(AnimationTypes.Larson); break;
@@ -77,9 +76,9 @@ public class CANdleSystem extends SubsystemBase {
             case SetAll: changeAnimation(AnimationTypes.ColorFlow); break;
         }
     }
-    public void setColors() {
+    /*public void setColors() {
         changeAnimation(AnimationTypes.SetAll);
-    }
+    }*/
 
     /* Wrappers so we can access the CANdle from the subsystem */
     public double getVbat() { return candle.getBusVoltage(); }
@@ -91,7 +90,7 @@ public class CANdleSystem extends SubsystemBase {
     public void configLedType(LEDStripType type) { candle.configLEDType(type, 0); }
     public void configStatusLedBehavior(boolean offWhenActive) { candle.configStatusLedState(offWhenActive, 0); }
 
-    public void changeAnimation(AnimationTypes toChange) {
+    /*public void changeAnimation(AnimationTypes toChange) {
         currentAnimation = toChange;
         
         switch(toChange)
@@ -128,19 +127,46 @@ public class CANdleSystem extends SubsystemBase {
                 break;
         }
         System.out.println("Changed to " + currentAnimation.toString());
+    }*/
+
+    public void police(){
+        Timer timer = new Timer();
+        boolean flag = false;
+        timer.start();
+        while(true){
+            if(timer.get() > 0.25 && !flag){
+                candle.setLEDs(0, 0, 0, 0, 0, 179);
+                candle.setLEDs(0, 0, 255, 0, 180, 300);
+                timer.reset();
+                timer.start();
+                flag = true;
+            }
+            if(timer.get() > 0.25 && flag){
+                candle.setLEDs(0, 0, 0, 0, 180, 300);
+                candle.setLEDs(255, 0, 0, 0, 0, 179);
+                timer.reset();
+                timer.start();
+                flag = false;
+            }
+        }
+        /*new WaitCommand(2);
+        candle.setLEDs(0, 0, 255, 0, 150, 299);
+        new WaitCommand(2);
+        candle.setLEDs(0, 0, 0, 0, 150, 299);
+        new WaitCommand(2);*/
     }
 
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        if(toAnimate == null) {
+        /*if(toAnimate == null) {
             candle.setLEDs((int)(xboxController.getLeftTriggerAxis() * 255), 
                               (int)(xboxController.getRightTriggerAxis() * 255), 
                               (int)(xboxController.getLeftX() * 255));
         } else {
             candle.animate(toAnimate);
         }
-        candle.modulateVBatOutput(xboxController.getRightY());
+        candle.modulateVBatOutput(xboxController.getRightY());*/
     }
 
     @Override
