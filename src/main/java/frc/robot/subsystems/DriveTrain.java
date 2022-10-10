@@ -2,7 +2,7 @@ package frc.robot.subsystems;
 
 
 
-import com.ctre.phoenix.sensors.PigeonIMU;
+import com.ctre.phoenix.sensors.Pigeon2;
 
 import frc.robot.Constants;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -19,12 +19,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class DriveTrain extends SubsystemBase {
     public SwerveDriveOdometry swerveOdometry;
     public SwerveModule[] mSwerveMods;
-    public PigeonIMU gyro;
+    public Pigeon2 gyro;
     private NetworkTableEntry mod0Cancoder, mod1Cancoder, mod2Cancoder, mod3Cancoder;
     private NetworkTableEntry gyroHeading;
 
     public DriveTrain() {
-        gyro = new PigeonIMU(Constants.DriveTrain.PIGEON_ID);
+        gyro = new Pigeon2(Constants.DriveTrain.PIGEON_ID, "CANivore");
         gyro.configFactoryDefault();
         zeroGyro();
         
@@ -76,10 +76,6 @@ public class DriveTrain extends SubsystemBase {
         return swerveOdometry.getPoseMeters();
     }
 
-    public void gyro180() {
-        gyro.setCompassAngle(180);
-    }
-
     public void resetOdometry(Pose2d pose) {
         swerveOdometry.resetPosition(pose, getYaw());
     }
@@ -94,10 +90,6 @@ public class DriveTrain extends SubsystemBase {
 
     public void zeroGyro(){
         gyro.setYaw(0);
-    }
-
-    public void zeroWheels(){
-        gyro.setFusedHeading(0);
     }
 
     public Rotation2d getYaw() {
