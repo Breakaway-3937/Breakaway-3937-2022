@@ -70,7 +70,6 @@ public class RobotContainer {
     /*new JoystickButton(xboxController, Constants.BLOCK_BUTTON).whenPressed(s_Candle::setColors, s_Candle);
     new JoystickButton(xboxController, Constants.INCREMENT_ANIM_BUTTON).whenPressed(s_Candle::incrementAnimation, s_Candle);
     new JoystickButton(xboxController, Constants.DECREMENT_ANIM_BUTTON).whenPressed(s_Candle::decrementAnimation, s_Candle);*/
-    new JoystickButton(xboxController, Constants.Controllers.XBOXCONTROLLER_B_BUTTON).whenPressed(new InstantCommand(() -> s_Candle.police()));
   } 
 
   /**

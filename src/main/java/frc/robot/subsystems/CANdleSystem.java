@@ -7,7 +7,6 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 
 import com.ctre.phoenix.led.*;
@@ -17,6 +16,8 @@ import com.ctre.phoenix.led.CANdle.VBatOutputMode;
 
 public class CANdleSystem extends SubsystemBase {
     private final CANdle candle = new CANdle(Constants.CANDLE_ID, "CANivore");
+    private Timer timer = new Timer();
+    private boolean flag = false;
     //private final int ledCount = 300;
     //private XboxController xboxController;
 
@@ -46,6 +47,7 @@ public class CANdleSystem extends SubsystemBase {
         configAll.brightnessScalar = 0.1;
         configAll.vBatOutputMode = VBatOutputMode.Modulated;
         candle.configAllSettings(configAll, 100);
+        timer.start();
     }
 
     /*public void incrementAnimation() {
@@ -129,44 +131,35 @@ public class CANdleSystem extends SubsystemBase {
         System.out.println("Changed to " + currentAnimation.toString());
     }*/
 
-    public void police(){
-        Timer timer = new Timer();
-        boolean flag = false;
-        timer.start();
-        while(true){
-            if(timer.get() > 0.25 && !flag){
-                candle.setLEDs(0, 0, 0, 0, 0, 179);
-                candle.setLEDs(0, 0, 255, 0, 180, 300);
-                timer.reset();
-                timer.start();
-                flag = true;
-            }
-            if(timer.get() > 0.25 && flag){
-                candle.setLEDs(0, 0, 0, 0, 180, 300);
-                candle.setLEDs(255, 0, 0, 0, 0, 179);
-                timer.reset();
-                timer.start();
-                flag = false;
-            }
-        }
-        /*new WaitCommand(2);
-        candle.setLEDs(0, 0, 255, 0, 150, 299);
-        new WaitCommand(2);
-        candle.setLEDs(0, 0, 0, 0, 150, 299);
-        new WaitCommand(2);*/
-    }
-
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        /*if(toAnimate == null) {
-            candle.setLEDs((int)(xboxController.getLeftTriggerAxis() * 255), 
-                              (int)(xboxController.getRightTriggerAxis() * 255), 
-                              (int)(xboxController.getLeftX() * 255));
-        } else {
-            candle.animate(toAnimate);
+        /*if(timer.get() > 0.25 && !flag){
+            candle.setLEDs(0, 0, 0, 0, 0, 179);
+            candle.setLEDs(0, 0, 255, 0, 180, 300);
+            timer.reset();
+            timer.start();
+            flag = true;
         }
-        candle.modulateVBatOutput(xboxController.getRightY());*/
+        else if(timer.get() > 0.25 && flag){
+            candle.setLEDs(0, 0, 0, 0, 180, 300);
+            candle.setLEDs(255, 0, 0, 0, 0, 179);
+            timer.reset();
+            timer.start();
+            flag = false;
+        }*/
+        /*for(int i = 8; i < 306; i++){
+            if(i % 2 != 0 && timer.get() > 0.25){
+                candle.setLEDs(0, 0, 0, 0, i, i);
+                candle.setLEDs(255, 0, 0, 0, i, i);
+                timer.reset();
+            }
+            else if(i % 2 == 0 && timer.get() > 0.25){
+                candle.setLEDs(0, 0, 0, 0, i, i);
+                candle.setLEDs(0, 0, 255, 0, i, i);
+            }
+        }*/
+        candle.setLEDs(0, 255, 0, 0, 8, 300);
     }
 
     @Override
