@@ -134,32 +134,22 @@ public class CANdleSystem extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        /*if(timer.get() > 0.25 && !flag){
-            candle.setLEDs(0, 0, 0, 0, 0, 179);
-            candle.setLEDs(0, 0, 255, 0, 180, 300);
+        if(timer.get() > 0.25 && !flag){
+            candle.setLEDs(0, 0, 0, 0, 0, 350);
+            for(int i = 8; i < 308; i += 2){
+                candle.setLEDs(255, 0, 0, 0, i, 1);
+            }
             timer.reset();
-            timer.start();
             flag = true;
         }
         else if(timer.get() > 0.25 && flag){
-            candle.setLEDs(0, 0, 0, 0, 180, 300);
-            candle.setLEDs(255, 0, 0, 0, 0, 179);
+            candle.setLEDs(0, 0, 0, 0, 0, 350);
+            for(int i = 9; i < 308; i += 2){
+                candle.setLEDs(0, 0, 255, 0, i, 1);
+            }
             timer.reset();
-            timer.start();
             flag = false;
-        }*/
-        /*for(int i = 8; i < 306; i++){
-            if(i % 2 != 0 && timer.get() > 0.25){
-                candle.setLEDs(0, 0, 0, 0, i, i);
-                candle.setLEDs(255, 0, 0, 0, i, i);
-                timer.reset();
-            }
-            else if(i % 2 == 0 && timer.get() > 0.25){
-                candle.setLEDs(0, 0, 0, 0, i, i);
-                candle.setLEDs(0, 0, 255, 0, i, i);
-            }
-        }*/
-        candle.setLEDs(0, 255, 0, 0, 8, 300);
+        }
     }
 
     @Override
