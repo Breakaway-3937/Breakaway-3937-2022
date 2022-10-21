@@ -47,7 +47,6 @@ public class RobotContainer {
   
   /* Commands */
   private final AutoTargetDetection c_AutoTargetDetection = new AutoTargetDetection(s_DriveTrain, s_LimeLight);
-  //private final Speaker c_Speaker = new Speaker();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {

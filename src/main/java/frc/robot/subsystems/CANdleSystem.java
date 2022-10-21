@@ -150,6 +150,34 @@ public class CANdleSystem extends SubsystemBase {
             timer.reset();
             flag = false;
         }
+        /*if(timer.get() > 0.25 && !flag){
+            candle.setLEDs(0,0,0,0,0,350);
+            for (int i = 8; i < 100; i++){
+                candle.setLEDs(255,255,255,0,i,2);
+                //candle.setLEDs(0,0,0,0,i,1);
+            }
+            timer.reset();
+            flag = true;
+        }
+
+        if(timer.get() > 0.25 && !flag){
+            candle.setLEDs(0, 0, 0, 0, 0, 350);
+            for(int i = 8; i < 108; i++){
+                candle.setLEDs(255, 0, 0, 0, i, 1);
+            }
+            timer.reset();
+            flag = true;
+        }
+        else if(timer.get() > 0.25 && flag){
+            candle.setLEDs(0, 0, 0, 0, 0, 350);
+            for(int i = 7; i < 108; i++){
+                candle.setLEDs(0, 0, 0, 0, i -2, 1);
+            }
+            timer.reset();
+            flag = false;
+        }*/
+        
+        //white = 234,221,202
     }
 
     @Override
