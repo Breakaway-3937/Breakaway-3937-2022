@@ -3,6 +3,10 @@ package frc.robot.commands;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
+
+import java.io.File;
+
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -20,6 +24,8 @@ public class TeleopSwerve extends CommandBase {
     private int translationAxis;
     private int strafeAxis;
     private int rotationAxis;
+    Timer timer;
+
 
     /**
      * Driver control
@@ -35,6 +41,10 @@ public class TeleopSwerve extends CommandBase {
         this.rotationAxis = rotationAxis;
         this.fieldRelative = fieldRelative;
         this.openLoop = openLoop;
+
+        timer = new Timer();
+        timer.reset();
+        timer.start();
     }
 
     @Override
@@ -47,6 +57,24 @@ public class TeleopSwerve extends CommandBase {
         yAxis = (Math.abs(yAxis) < Constants.Controllers.STICK_DEADBAND) ? 0 : yAxis;
         xAxis = (Math.abs(xAxis) < Constants.Controllers.STICK_DEADBAND) ? 0 : xAxis;
         rAxis = (Math.abs(rAxis) < Constants.Controllers.STICK_DEADBAND) ? 0 : rAxis;
+        
+    if(timer.get() > 60)
+        {
+           if(fieldRelative)
+            {
+                fieldRelative = false;
+                System.out.print("ROBOT");
+            }
+            else
+            {
+                fieldRelative = true;
+                System.out.print("FIELD");
+            }
+            timer.reset();
+
+        }
+        
+
 
         translation = new Translation2d(yAxis, xAxis).times(Constants.DriveTrain.MAX_SPEED);
         rotation = rAxis * Constants.DriveTrain.MAX_ANGULAR_VELOCITY;

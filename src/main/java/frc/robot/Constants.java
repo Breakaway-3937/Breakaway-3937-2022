@@ -12,7 +12,7 @@ import frc.lib.util.SwerveModuleConstants;
 /* Name All Variables in ALL_CAPS Format */
 
 public final class Constants {
-    public static final boolean FIELD_RELATIVE = true;
+    public static boolean FIELD_RELATIVE = true;
     public static final boolean OPEN_LOOP = true;
     public static final boolean COMP_BOT = true;
     public static final boolean AUTO_LOG = false;

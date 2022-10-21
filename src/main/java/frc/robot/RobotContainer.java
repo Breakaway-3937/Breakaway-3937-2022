@@ -40,10 +40,12 @@ public class RobotContainer {
   private final int strafeAxis = Constants.Controllers.STRAFE_AXIS;
   private final int rotationAxis = Constants.Controllers.ROTATION_AXIS;
   private final boolean openLoop = Constants.OPEN_LOOP;
-  private final boolean fieldRelative = Constants.FIELD_RELATIVE;
+  private  boolean fieldRelative = Constants.FIELD_RELATIVE;
 
   /* Driver Buttons */
   private final JoystickButton aButton = new JoystickButton(xboxController, Constants.Controllers.XBOXCONTROLLER_A_BUTTON);
+
+
 
   private final JoystickButton rotationButton = new JoystickButton(rotationController, Constants.Controllers.ROTATION_BUTTON);
   private final JoystickButton translationButton = new JoystickButton(translationController, Constants.Controllers.TRANSLATION_BUTTON);
@@ -128,13 +130,14 @@ public class RobotContainer {
   private void configureButtonBindings() {
     /* Driver Buttons */
     translationButton.whenPressed(new InstantCommand(() -> s_DriveTrain.zeroGyro()));
-    rotationButton.whenPressed(c_AutoTargetDetection)
-                  .whenReleased(new InstantCommand(() -> c_AutoTargetDetection.cancel()));
-
+   // rotationButton.whenPressed(c_AutoTargetDetection)
+   //              .whenReleased(new InstantCommand(() -> c_AutoTargetDetection.cancel()));
+   
     dPadUp.whenPressed(new InstantCommand(() -> s_Shooter.setFender()));
     dPadDown.whenPressed(new InstantCommand(() -> s_Shooter.setTarmac()));
     dPadLeft.whenPressed(new InstantCommand(() -> s_Shooter.setLimeLight()));
     dPadRight.whenPressed(new InstantCommand(() -> s_Shooter.setLaunchPad()));
+
 
     rightTrigger.whenPressed(c_FireShooter)
                 .whenReleased(new InstantCommand(() -> c_FireShooter.cancel()));

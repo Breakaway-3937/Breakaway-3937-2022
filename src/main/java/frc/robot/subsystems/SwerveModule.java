@@ -25,6 +25,7 @@ public class SwerveModule {
     private CANCoder angleEncoder;
     private double lastAngle;
 
+
     SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.DriveTrain.DRIVE_KS, Constants.DriveTrain.DRIVE_KV, Constants.DriveTrain.DRIVE_KA);
 
     public SwerveModule(int moduleNumber, SwerveModuleConstants moduleConstants){
@@ -48,6 +49,16 @@ public class SwerveModule {
 
         lastAngle = getState().angle.getDegrees();
     }
+    
+
+
+
+
+
+
+
+
+
 
     public void setDesiredState(SwerveModuleState desiredState, boolean isOpenLoop){
         desiredState = CTREModuleState.optimize(desiredState, getState().angle); //Custom optimize command, since default WPILib optimize assumes continuous controller which CTRE is not
