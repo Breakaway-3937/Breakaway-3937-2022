@@ -24,7 +24,6 @@ public class SwerveModule {
     private TalonFX mDriveMotor;
     private CANCoder angleEncoder;
     private double lastAngle;
-    private boolean jeffords;
 
     SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.DriveTrain.DRIVE_KS, Constants.DriveTrain.DRIVE_KV, Constants.DriveTrain.DRIVE_KA);
 
