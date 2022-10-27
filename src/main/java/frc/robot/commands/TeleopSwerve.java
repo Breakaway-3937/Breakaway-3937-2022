@@ -3,6 +3,7 @@ package frc.robot.commands;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -17,6 +18,7 @@ public class TeleopSwerve extends CommandBase {
     private DriveTrain s_DriveTrain;
     private Joystick translationalController;
     private Joystick rotationalController;
+    private XboxController xboxController;
     private int translationAxis;
     private int strafeAxis;
     private int rotationAxis;
@@ -24,7 +26,7 @@ public class TeleopSwerve extends CommandBase {
     /**
      * Driver control
      */
-    public TeleopSwerve(DriveTrain s_DriveTrain, Joystick controller, Joystick controller1, int translationAxis, int strafeAxis, int rotationAxis, boolean fieldRelative, boolean openLoop) {
+    public TeleopSwerve(DriveTrain s_DriveTrain, Joystick controller, Joystick controller1, int translationAxis, int strafeAxis, int rotationAxis, boolean fieldRelative, boolean openLoop, XboxController xboxController) {
         this.s_DriveTrain = s_DriveTrain;
         addRequirements(s_DriveTrain);
 
@@ -35,6 +37,7 @@ public class TeleopSwerve extends CommandBase {
         this.rotationAxis = rotationAxis;
         this.fieldRelative = fieldRelative;
         this.openLoop = openLoop;
+        this.xboxController = xboxController;
     }
 
     @Override
@@ -42,6 +45,16 @@ public class TeleopSwerve extends CommandBase {
         double yAxis = translationalController.getRawAxis(strafeAxis);
         double xAxis = translationalController.getRawAxis(translationAxis);
         double rAxis = rotationalController.getRawAxis(rotationAxis);
+
+
+        if(xboxController.getRawButtonPressed(1) && fieldRelative == true)
+        {
+            fieldRelative = false;
+        }
+        else if(xboxController.getRawButtonPressed(1) && fieldRelative == false)
+        {
+            fieldRelative = true;
+        }
         
         /* Deadbands */
         yAxis = (Math.abs(yAxis) < Constants.Controllers.STICK_DEADBAND) ? 0 : yAxis;
