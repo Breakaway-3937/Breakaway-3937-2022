@@ -44,8 +44,7 @@ public class TeleopSwerve extends CommandBase {
         double rAxis = rotationalController.getRawAxis(rotationAxis);
 
 
-        fieldRelative = s_DriveTrain.test3();
-        System.out.println("hi" + fieldRelative);
+        fieldRelative = s_DriveTrain.getJeffords();
         
         /* Deadbands */
         yAxis = (Math.abs(yAxis) < Constants.Controllers.STICK_DEADBAND) ? 0 : yAxis;

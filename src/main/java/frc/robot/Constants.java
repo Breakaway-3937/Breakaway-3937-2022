@@ -21,6 +21,8 @@ public final class Constants {
         public static final GenericHID TRANSLATION_CONTROLLER = new GenericHID(0);
         public static final GenericHID ROTATION_CONTROLLER = new GenericHID(1);
         public static final GenericHID XBOX_CONTROLLER = new GenericHID(2);
+        public static final GenericHID BUTTONS = new GenericHID(3);
+        public static final int BUTTON_ONE = 1;
         public static final int XBOXCONTROLLER_A_BUTTON = 1;
         public static final int XBOXCONTROLLER_B_BUTTON = 2;
         public static final int XBOXCONTROLLER_X_BUTTON = 3;

@@ -108,19 +108,19 @@ public class DriveTrain extends SubsystemBase {
     }
 
 
-    public boolean test1()
+    public boolean fieldRelativeTrue()
     {
         jeffords = false;
         return jeffords;
     }
 
-    public boolean test2()
+    public boolean fieldRelativeFalse()
     {
         jeffords = true;
         return jeffords;
     }
 
-    public boolean test3()
+    public boolean getJeffords()
     {
         return jeffords;
     }
