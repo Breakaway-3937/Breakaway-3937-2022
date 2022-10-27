@@ -14,11 +14,9 @@ public class TeleopSwerve extends CommandBase {
     private Translation2d translation;
     private boolean fieldRelative;
     private boolean openLoop;
-    
     private DriveTrain s_DriveTrain;
     private Joystick translationalController;
     private Joystick rotationalController;
-    private XboxController xboxController;
     private int translationAxis;
     private int strafeAxis;
     private int rotationAxis;
@@ -37,7 +35,6 @@ public class TeleopSwerve extends CommandBase {
         this.rotationAxis = rotationAxis;
         this.fieldRelative = fieldRelative;
         this.openLoop = openLoop;
-        this.xboxController = xboxController;
     }
 
     @Override
@@ -47,14 +44,7 @@ public class TeleopSwerve extends CommandBase {
         double rAxis = rotationalController.getRawAxis(rotationAxis);
 
 
-        if(xboxController.getRawButtonPressed(1) && fieldRelative == true)
-        {
-            fieldRelative = false;
-        }
-        else if(xboxController.getRawButtonPressed(1) && fieldRelative == false)
-        {
-            fieldRelative = true;
-        }
+        fieldRelative = s_DriveTrain.test3();
         
         /* Deadbands */
         yAxis = (Math.abs(yAxis) < Constants.Controllers.STICK_DEADBAND) ? 0 : yAxis;

@@ -22,6 +22,7 @@ public class DriveTrain extends SubsystemBase {
     public PigeonIMU gyro;
     private NetworkTableEntry mod0Cancoder, mod1Cancoder, mod2Cancoder, mod3Cancoder;
     private NetworkTableEntry gyroHeading;
+    private boolean jeffords;
 
     public DriveTrain() {
         gyro = new PigeonIMU(Constants.DriveTrain.PIGEON_ID);
@@ -105,6 +106,26 @@ public class DriveTrain extends SubsystemBase {
         gyro.getYawPitchRoll(ypr);
         return (Constants.DriveTrain.INVERT_GYRO) ? Rotation2d.fromDegrees(360 - ypr[0]) : Rotation2d.fromDegrees(ypr[0]);
     }
+
+
+    public boolean test1()
+    {
+        jeffords = false;
+        return jeffords;
+    }
+
+    public boolean test2()
+    {
+        jeffords = true;
+        return jeffords;
+    }
+
+    public boolean test3()
+    {
+        return jeffords;
+    }
+
+    
 
     @Override
     public void periodic(){

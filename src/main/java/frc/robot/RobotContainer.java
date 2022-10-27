@@ -128,16 +128,20 @@ public class RobotContainer {
   private void configureButtonBindings() {
     /* Driver Buttons */
     translationButton.whenPressed(new InstantCommand(() -> s_DriveTrain.zeroGyro()));
-    rotationButton.whenPressed(c_AutoTargetDetection)
-                  .whenReleased(new InstantCommand(() -> c_AutoTargetDetection.cancel()));
+    /*rotationButton.whenPressed(c_AutoTargetDetection)
+                  .whenReleased(new InstantCommand(() -> c_AutoTargetDetection.cancel()));*/
 
     dPadUp.whenPressed(new InstantCommand(() -> s_Shooter.setFender()));
     dPadDown.whenPressed(new InstantCommand(() -> s_Shooter.setTarmac()));
     dPadLeft.whenPressed(new InstantCommand(() -> s_Shooter.setLimeLight()));
     dPadRight.whenPressed(new InstantCommand(() -> s_Shooter.setLaunchPad()));
 
+    rotationButton.whenPressed(new InstantCommand(() -> s_DriveTrain.test1()))
+                  .whenReleased(new InstantCommand(() -> s_DriveTrain.test2()));
+
     rightTrigger.whenPressed(c_FireShooter)
                 .whenReleased(new InstantCommand(() -> c_FireShooter.cancel()));
+    
 
     aButton.whenPressed(new InstantCommand(() -> s_LimeLight.turnLightOn()));
             
