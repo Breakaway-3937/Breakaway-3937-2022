@@ -4,7 +4,6 @@ import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -19,7 +18,6 @@ public class TeleopSwerve extends CommandBase {
     private DriveTrain s_DriveTrain;
     private Joystick translationalController;
     private Joystick rotationalController;
-    private XboxController xboxController;
     private int translationAxis;
     private int strafeAxis;
     private int rotationAxis;
@@ -29,7 +27,7 @@ public class TeleopSwerve extends CommandBase {
     /**
      * Driver control
      */
-    public TeleopSwerve(DriveTrain s_DriveTrain, Joystick controller, Joystick controller1, int translationAxis, int strafeAxis, int rotationAxis, boolean fieldRelative, boolean openLoop, XboxController xboxController) {
+    public TeleopSwerve(DriveTrain s_DriveTrain, Joystick controller, Joystick controller1, int translationAxis, int strafeAxis, int rotationAxis, boolean fieldRelative, boolean openLoop) {
         this.s_DriveTrain = s_DriveTrain;
         addRequirements(s_DriveTrain);
 
@@ -40,7 +38,6 @@ public class TeleopSwerve extends CommandBase {
         this.rotationAxis = rotationAxis;
         this.fieldRelative = fieldRelative;
         this.openLoop = openLoop;
-        this.xboxController = xboxController;
 
         timer = new Timer();
         timer.reset();
@@ -74,14 +71,6 @@ public class TeleopSwerve extends CommandBase {
 
         }*/
         
-        if(xboxController.getRawButtonPressed(1) && fieldRelative == true)
-        {
-            fieldRelative = false;
-        }
-        else if(xboxController.getRawButtonPressed(1) && fieldRelative == false)
-        {
-            fieldRelative = true;
-        }
 
 
 
