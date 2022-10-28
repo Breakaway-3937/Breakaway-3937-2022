@@ -35,7 +35,7 @@ public class RobotContainer {
   private final Joystick rotationController = new Joystick(1);
   public final XboxController xboxController = new XboxController(2);
   private final Joystick xboxControllerJoystick = new Joystick(2);
-  private final GenericHID buttons = new GenericHID(3);
+  private final Joystick buttons = new Joystick(3);
 
   /* Drive Controls */
   private final int translationAxis = Constants.Controllers.TRANSLATION_AXIS;
