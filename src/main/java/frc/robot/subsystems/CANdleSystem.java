@@ -17,7 +17,12 @@ import com.ctre.phoenix.led.CANdle.VBatOutputMode;
 public class CANdleSystem extends SubsystemBase {
     private final CANdle candle = new CANdle(Constants.CANDLE_ID, "CANivore");
     private Timer timer = new Timer();
+    private Timer timer2 = new Timer();
     private boolean flag = false;
+    private int count = 8;
+    private int count2 = 1;
+    private int count3 = 8;
+    private int count4 = 8;
     //private final int ledCount = 300;
     //private XboxController xboxController;
 
@@ -48,6 +53,7 @@ public class CANdleSystem extends SubsystemBase {
         configAll.vBatOutputMode = VBatOutputMode.Modulated;
         candle.configAllSettings(configAll, 100);
         timer.start();
+        timer2.start();
     }
 
     /*public void incrementAnimation() {
@@ -131,10 +137,15 @@ public class CANdleSystem extends SubsystemBase {
         System.out.println("Changed to " + currentAnimation.toString());
     }*/
 
+    public void chase(int num){
+        candle.setLEDs(255, 0, 0, 0, num, 1);
+        candle.setLEDs(255, 0, 0, 0, num - 8, 1);
+    }
+
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        if(timer.get() > 0.25 && !flag){
+        /*if(timer.get() > 0.25 && !flag){
             candle.setLEDs(0, 0, 0, 0, 0, 350);
             for(int i = 8; i < 308; i += 2){
                 candle.setLEDs(255, 0, 0, 0, i, 1);
@@ -149,7 +160,44 @@ public class CANdleSystem extends SubsystemBase {
             }
             timer.reset();
             flag = false;
+        }*/
+        if(timer.get() > 0.05){
+            if(count2 == 1){
+                chase(count);
+                timer.reset();
+                count++;
+            }
+            else if(count2 == 2){
+                chase(count3);
+                timer.reset();
+                count3++;
+            }
+            else if(count2 == 3){
+                chase(count4);
+                timer.reset();
+                count4++;
+            }
         }
+        /*if(timer.get() > 0.05){
+            candle.setLEDs(255, 0, 0, 0, count, 1);
+            candle.setLEDs(0, 0, 0, 0, count - 2, 1);
+            if(timer2.get() > 0.05){
+                candle.setLEDs(255, 0, 0, 0, count2, 1);
+                candle.setLEDs(0, 0, 0, 0, count2 - 2, 1);
+                count2++;
+                timer2.reset();
+            }
+            count++;
+            timer.reset();
+            if(count > 100){
+                count = 8;
+                candle.setLEDs(0, 0, 0, 0, count, 5);
+            }
+            if(count2 > 100){
+                count2 = 8;
+                candle.setLEDs(0, 0, 0, 0, count2, 5);
+            }
+        }*/
         /*if(timer.get() > 0.25 && !flag){
             candle.setLEDs(0,0,0,0,0,350);
             for (int i = 8; i < 100; i++){
