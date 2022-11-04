@@ -19,13 +19,12 @@ public class TeleopSwerve extends CommandBase {
     private int translationAxis;
     private int strafeAxis;
     private int rotationAxis;
-    Timer timer;
 
 
     /**
      * Driver control
      */
-    public TeleopSwerve(DriveTrain s_DriveTrain, Joystick controller, Joystick controller1, int translationAxis, int strafeAxis, int rotationAxis, boolean fieldRelative, boolean openLoop, XboxController xboxController) {
+    public TeleopSwerve(DriveTrain s_DriveTrain, Joystick controller, Joystick controller1, int translationAxis, int strafeAxis, int rotationAxis, boolean fieldRelative, boolean openLoop) {
         this.s_DriveTrain = s_DriveTrain;
         addRequirements(s_DriveTrain);
 
@@ -37,9 +36,7 @@ public class TeleopSwerve extends CommandBase {
         this.fieldRelative = fieldRelative;
         this.openLoop = openLoop;
 
-        timer = new Timer();
-        timer.reset();
-        timer.start();
+        
     }
 
     @Override
