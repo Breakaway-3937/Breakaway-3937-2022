@@ -20,7 +20,7 @@ public class DriveTrain extends SubsystemBase {
     public SwerveDriveOdometry swerveOdometry;
     public SwerveModule[] mSwerveMods;
     public Pigeon2 gyro;
-    private NetworkTableEntry mod0Cancoder, mod1Cancoder, mod2Cancoder, mod3Cancoder;
+    public NetworkTableEntry mod0Cancoder, mod1Cancoder, mod2Cancoder, mod3Cancoder;
     private NetworkTableEntry gyroHeading;
 
     public DriveTrain() {
