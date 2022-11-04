@@ -8,10 +8,12 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
 
 import com.ctre.phoenix.led.*;
 import com.ctre.phoenix.led.CANdle.LEDStripType;
 import com.ctre.phoenix.led.CANdle.VBatOutputMode;
+import java.lang.Math;
 
 
 public class CANdleSystem extends SubsystemBase {
@@ -54,6 +56,7 @@ public class CANdleSystem extends SubsystemBase {
         candle.configAllSettings(configAll, 100);
         timer.start();
         timer2.start();
+        candle.setLEDs(0, 0, 0, 0, 0, 400);
     }
 
     /*public void incrementAnimation() {
@@ -138,8 +141,8 @@ public class CANdleSystem extends SubsystemBase {
     }*/
 
     public void chase(int num){
-        candle.setLEDs(255, 0, 0, 0, num, 1);
-        candle.setLEDs(255, 0, 0, 0, num - 8, 1);
+        candle.setLEDs(255, 0, 0, 0, num, 2);
+        candle.setLEDs(0, 0, 0, 0, num - 8, 2);
     }
 
     @Override
@@ -161,70 +164,32 @@ public class CANdleSystem extends SubsystemBase {
             timer.reset();
             flag = false;
         }*/
-        if(timer.get() > 0.05){
-            if(count2 == 1){
-                chase(count);
-                timer.reset();
-                count++;
-            }
-            else if(count2 == 2){
-                chase(count3);
-                timer.reset();
-                count3++;
-            }
-            else if(count2 == 3){
-                chase(count4);
-                timer.reset();
-                count4++;
-            }
-        }
         /*if(timer.get() > 0.05){
-            candle.setLEDs(255, 0, 0, 0, count, 1);
-            candle.setLEDs(0, 0, 0, 0, count - 2, 1);
-            if(timer2.get() > 0.05){
-                candle.setLEDs(255, 0, 0, 0, count2, 1);
-                candle.setLEDs(0, 0, 0, 0, count2 - 2, 1);
-                count2++;
-                timer2.reset();
-            }
+            chase(count);
             count++;
-            timer.reset();
-            if(count > 100){
+            if(count > 309){
                 count = 8;
-                candle.setLEDs(0, 0, 0, 0, count, 5);
-            }
-            if(count2 > 100){
-                count2 = 8;
-                candle.setLEDs(0, 0, 0, 0, count2, 5);
             }
         }*/
-        /*if(timer.get() > 0.25 && !flag){
-            candle.setLEDs(0,0,0,0,0,350);
-            for (int i = 8; i < 100; i++){
-                candle.setLEDs(255,255,255,0,i,2);
-                //candle.setLEDs(0,0,0,0,i,1);
-            }
+        /*if(timer.get() > 0.05 && (int)(Math.random() * 10) + 1 > 5){
+            candle.setLEDs(0, 255, 0, 0, 10, 5);
+            candle.setLEDs(0, 0, 0, 0, 0, 500);
             timer.reset();
-            flag = true;
-        }
+        }*/
 
-        if(timer.get() > 0.25 && !flag){
-            candle.setLEDs(0, 0, 0, 0, 0, 350);
-            for(int i = 8; i < 108; i++){
-                candle.setLEDs(255, 0, 0, 0, i, 1);
-            }
-            timer.reset();
-            flag = true;
+
+        if(Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) > 50 && Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) < 145){
+
         }
-        else if(timer.get() > 0.25 && flag){
-            candle.setLEDs(0, 0, 0, 0, 0, 350);
-            for(int i = 7; i < 108; i++){
-                candle.setLEDs(0, 0, 0, 0, i -2, 1);
-            }
-            timer.reset();
-            flag = false;
-        }*/
-        
+        else if(Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) < 50 || (Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) < 360 && Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) > 325)){
+            
+        }
+        else if(Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) > 230 && Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) < 320){
+            
+        }
+        else if(Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) > 145 && Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) < 230){
+            
+        }
         //white = 234,221,202
     }
 
