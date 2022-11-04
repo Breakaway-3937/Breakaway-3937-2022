@@ -6,7 +6,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.DataLogManager;
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -35,7 +34,6 @@ public class RobotContainer {
   private final Joystick rotationController = new Joystick(1);
   public final XboxController xboxController = new XboxController(2);
   private final Joystick xboxControllerJoystick = new Joystick(2);
-  private final Joystick buttons = new Joystick(3);
 
   /* Drive Controls */
   private final int translationAxis = Constants.Controllers.TRANSLATION_AXIS;
@@ -46,7 +44,6 @@ public class RobotContainer {
 
   /* Driver Buttons */
   private final JoystickButton aButton = new JoystickButton(xboxController, Constants.Controllers.XBOXCONTROLLER_A_BUTTON);
-  private final JoystickButton button1 = new JoystickButton(buttons, Constants.Controllers.BUTTON_ONE);
 
 
 
@@ -115,7 +112,7 @@ public class RobotContainer {
     autoTab.add("Command Chooser", s_Command).withPosition(0, 0);
     
     s_Shooter.hoodSetPosition(Constants.Shooter.NORMAL_RUN);
-    s_DriveTrain.setDefaultCommand(new TeleopSwerve(s_DriveTrain, translationController, rotationController, translationAxis, strafeAxis, rotationAxis, fieldRelative, openLoop, xboxController));
+    s_DriveTrain.setDefaultCommand(new TeleopSwerve(s_DriveTrain, translationController, rotationController, translationAxis, strafeAxis, rotationAxis, fieldRelative, openLoop));
     s_Shooter.setDefaultCommand(new StartShooter(s_Shooter, xboxController));
     s_Intake.setDefaultCommand(new RunIntake(s_Intake, xboxController));
     s_Climber.setDefaultCommand(new ClimberState(s_Climber, xboxController));
@@ -141,13 +138,9 @@ public class RobotContainer {
     dPadLeft.whenPressed(new InstantCommand(() -> s_Shooter.setLimeLight()));
     dPadRight.whenPressed(new InstantCommand(() -> s_Shooter.setLaunchPad()));
 
-    button1.whenPressed(new InstantCommand(() -> s_DriveTrain.fieldRelativeTrue()))
-                  .whenReleased(new InstantCommand(() -> s_DriveTrain.fieldRelativeFalse()));
-
 
     rightTrigger.whenPressed(c_FireShooter)
                 .whenReleased(new InstantCommand(() -> c_FireShooter.cancel()));
-    
 
     aButton.whenPressed(new InstantCommand(() -> s_LimeLight.turnLightOn()));
             
