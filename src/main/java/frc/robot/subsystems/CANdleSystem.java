@@ -4,7 +4,6 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -13,18 +12,10 @@ import frc.robot.Robot;
 import com.ctre.phoenix.led.*;
 import com.ctre.phoenix.led.CANdle.LEDStripType;
 import com.ctre.phoenix.led.CANdle.VBatOutputMode;
-import java.lang.Math;
 
 
 public class CANdleSystem extends SubsystemBase {
     private final CANdle candle = new CANdle(Constants.CANDLE_ID, "CANivore");
-    private Timer timer = new Timer();
-    private Timer timer2 = new Timer();
-    private boolean flag = false;
-    private int count = 8;
-    private int count2 = 1;
-    private int count3 = 8;
-    private int count4 = 8;
     //private final int ledCount = 300;
     //private XboxController xboxController;
 
@@ -54,8 +45,6 @@ public class CANdleSystem extends SubsystemBase {
         configAll.brightnessScalar = 0.1;
         configAll.vBatOutputMode = VBatOutputMode.Modulated;
         candle.configAllSettings(configAll, 100);
-        timer.start();
-        timer2.start();
         candle.setLEDs(0, 0, 0, 0, 0, 400);
     }
 
@@ -140,55 +129,32 @@ public class CANdleSystem extends SubsystemBase {
         System.out.println("Changed to " + currentAnimation.toString());
     }*/
 
-    public void chase(int num){
-        candle.setLEDs(255, 0, 0, 0, num, 2);
-        candle.setLEDs(0, 0, 0, 0, num - 8, 2);
-    }
-
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        /*if(timer.get() > 0.25 && !flag){
-            candle.setLEDs(0, 0, 0, 0, 0, 350);
-            for(int i = 8; i < 308; i += 2){
-                candle.setLEDs(255, 0, 0, 0, i, 1);
-            }
-            timer.reset();
-            flag = true;
-        }
-        else if(timer.get() > 0.25 && flag){
-            candle.setLEDs(0, 0, 0, 0, 0, 350);
-            for(int i = 9; i < 308; i += 2){
-                candle.setLEDs(0, 0, 255, 0, i, 1);
-            }
-            timer.reset();
-            flag = false;
-        }*/
-        /*if(timer.get() > 0.05){
-            chase(count);
-            count++;
-            if(count > 309){
-                count = 8;
-            }
-        }*/
-        /*if(timer.get() > 0.05 && (int)(Math.random() * 10) + 1 > 5){
-            candle.setLEDs(0, 255, 0, 0, 10, 5);
-            candle.setLEDs(0, 0, 0, 0, 0, 500);
-            timer.reset();
-        }*/
-
-
         if(Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) > 50 && Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) < 145){
-
+            candle.setLEDs(255, 0, 0, 0, 54, 18);
         }
-        else if(Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) < 50 || (Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) < 360 && Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) > 325)){
-            
+        else{
+            candle.setLEDs(0, 0, 0, 0, 54, 18);
         }
-        else if(Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) > 230 && Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) < 320){
-            
+        if(Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) < 50 || (Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) < 360 && Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) > 325)){
+            candle.setLEDs(255, 0, 0, 0, 96, 20);
         }
-        else if(Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) > 145 && Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) < 230){
-            
+        else{
+            candle.setLEDs(0, 0, 0, 0, 96, 20);
+        }
+        if(Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) > 230 && Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) < 320){
+            candle.setLEDs(255, 0, 0, 0, 144, 20);
+        }
+        else{
+            candle.setLEDs(0, 0, 0, 0, 144, 20);
+        }
+        if(Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) > 145 && Robot.m_robotContainer.s_DriveTrain.mod0Cancoder.getDouble(0.0) < 230){
+            candle.setLEDs(255, 0, 0, 0, 8, 18);
+        }
+        else{
+            candle.setLEDs(0, 0, 0, 0, 8, 18);
         }
         //white = 234,221,202
     }
