@@ -34,6 +34,7 @@ public class RobotContainer {
   private final Joystick translationController = new Joystick(0);
   private final Joystick rotationController = new Joystick(1);
   public final XboxController xboxController = new XboxController(2);
+  private final Joystick xboxControllerDrive = new Joystick(4);
   private final Joystick xboxControllerJoystick = new Joystick(2);
   private final Joystick buttons = new Joystick(3);
 
@@ -53,6 +54,10 @@ public class RobotContainer {
   private final JoystickButton rotationButton = new JoystickButton(rotationController, Constants.Controllers.ROTATION_BUTTON);
   private final JoystickButton translationButton = new JoystickButton(translationController, Constants.Controllers.TRANSLATION_BUTTON);
   
+  private final JoystickButton rotationButtonXbox = new JoystickButton(xboxControllerDrive, Constants.Controllers.ROTATION_BUTTON_XBOX);
+  private final JoystickButton translationButtonXbox = new JoystickButton(xboxControllerDrive, Constants.Controllers.TRANSLATION_BUTTON_XBOX);
+  
+
   private final JoystickAnalogButton rightTrigger = new JoystickAnalogButton(xboxController, Constants.Controllers.XBOX_CONTROLLER_RIGHT_TRIGGER, 0.3);  
 
   private final DPad dPadUp = new DPad(xboxControllerJoystick, 0);
@@ -115,7 +120,12 @@ public class RobotContainer {
     autoTab.add("Command Chooser", s_Command).withPosition(0, 0);
     
     s_Shooter.hoodSetPosition(Constants.Shooter.NORMAL_RUN);
-    s_DriveTrain.setDefaultCommand(new TeleopSwerve(s_DriveTrain, translationController, rotationController, translationAxis, strafeAxis, rotationAxis, fieldRelative, openLoop));
+    if(Constants.DRIVE_WITH_XBOX){
+      s_DriveTrain.setDefaultCommand(new TeleopSwerve(s_DriveTrain, xboxControllerDrive, xboxControllerDrive, translationAxis, strafeAxis, Constants.Controllers.XBOX_ROTATION_AXIS, fieldRelative, openLoop));
+    }
+    else{
+      s_DriveTrain.setDefaultCommand(new TeleopSwerve(s_DriveTrain, translationController, rotationController, translationAxis, strafeAxis, rotationAxis, fieldRelative, openLoop));
+    }
     s_Shooter.setDefaultCommand(new StartShooter(s_Shooter, xboxController));
     s_Intake.setDefaultCommand(new RunIntake(s_Intake, xboxController));
     s_Climber.setDefaultCommand(new ClimberState(s_Climber, xboxController));
@@ -136,13 +146,17 @@ public class RobotContainer {
     rotationButton.whenPressed(c_AutoTargetDetection)
                   .whenReleased(new InstantCommand(() -> c_AutoTargetDetection.cancel()));
    
+    translationButtonXbox.whenPressed(new InstantCommand(() -> s_DriveTrain.zeroGyro()));
+    rotationButtonXbox.whenPressed(c_AutoTargetDetection)
+                  .whenReleased(new InstantCommand(() -> c_AutoTargetDetection.cancel()));
+                 
     dPadUp.whenPressed(new InstantCommand(() -> s_Shooter.setFender()));
     dPadDown.whenPressed(new InstantCommand(() -> s_Shooter.setTarmac()));
     dPadLeft.whenPressed(new InstantCommand(() -> s_Shooter.setLimeLight()));
     dPadRight.whenPressed(new InstantCommand(() -> s_Shooter.setLaunchPad()));
 
-    button1.whenPressed(new InstantCommand(() -> s_DriveTrain.fieldRelativeTrue()))
-                  .whenReleased(new InstantCommand(() -> s_DriveTrain.fieldRelativeFalse()));
+    button1.whenPressed(new InstantCommand(() -> s_DriveTrain.fieldRelativeFalse()))
+                  .whenReleased(new InstantCommand(() -> s_DriveTrain.fieldRelativeTrue()));
 
 
     rightTrigger.whenPressed(c_FireShooter)
@@ -164,5 +178,3 @@ public class RobotContainer {
   }
 }
 
-
-//hi

@@ -22,7 +22,7 @@ public class DriveTrain extends SubsystemBase {
     public PigeonIMU gyro;
     private NetworkTableEntry mod0Cancoder, mod1Cancoder, mod2Cancoder, mod3Cancoder;
     private NetworkTableEntry gyroHeading;
-    private boolean jeffords;
+    private boolean jeffords = true;
 
     public DriveTrain() {
         gyro = new PigeonIMU(Constants.DriveTrain.PIGEON_ID);
@@ -108,13 +108,13 @@ public class DriveTrain extends SubsystemBase {
     }
 
 
-    public boolean fieldRelativeTrue()
+    public boolean fieldRelativeFalse()
     {
         jeffords = false;
         return jeffords;
     }
 
-    public boolean fieldRelativeFalse()
+    public boolean fieldRelativeTrue()
     {
         jeffords = true;
         return jeffords;

@@ -19,6 +19,7 @@ public class TeleopSwerve extends CommandBase {
     private int translationAxis;
     private int strafeAxis;
     private int rotationAxis;
+    private double yAxis, xAxis, rAxis;
 
 
     /**
@@ -41,9 +42,16 @@ public class TeleopSwerve extends CommandBase {
 
     @Override
     public void execute() {
-        double yAxis = translationalController.getRawAxis(strafeAxis);
-        double xAxis = translationalController.getRawAxis(translationAxis);
-        double rAxis = rotationalController.getRawAxis(rotationAxis);
+        if(Constants.DRIVE_WITH_XBOX){
+            yAxis = -translationalController.getRawAxis(strafeAxis);
+            xAxis = -translationalController.getRawAxis(translationAxis);
+            rAxis = -rotationalController.getRawAxis(rotationAxis);
+        }
+        else{
+            yAxis = translationalController.getRawAxis(strafeAxis);
+            xAxis = translationalController.getRawAxis(translationAxis);
+            rAxis = rotationalController.getRawAxis(rotationAxis);
+        }
 
 
         fieldRelative = s_DriveTrain.getJeffords();
@@ -52,24 +60,6 @@ public class TeleopSwerve extends CommandBase {
         yAxis = (Math.abs(yAxis) < Constants.Controllers.STICK_DEADBAND) ? 0 : yAxis;
         xAxis = (Math.abs(xAxis) < Constants.Controllers.STICK_DEADBAND) ? 0 : xAxis;
         rAxis = (Math.abs(rAxis) < Constants.Controllers.STICK_DEADBAND) ? 0 : rAxis;
-        
-    /*if(timer.get() > 60)
-        {
-           if(fieldRelative)
-            {
-                fieldRelative = false;
-                System.out.print("ROBOT");
-            }
-            else
-            {
-                fieldRelative = true;
-                System.out.print("FIELD");
-            }
-            timer.reset();
-
-        }*/
-        
-
 
 
         translation = new Translation2d(yAxis, xAxis).times(Constants.DriveTrain.MAX_SPEED);

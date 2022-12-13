@@ -13,16 +13,17 @@ import frc.lib.util.SwerveModuleConstants;
 
 public final class Constants {
     public static final boolean FIELD_RELATIVE = false;
-
     public static final boolean OPEN_LOOP = true;
     public static final boolean COMP_BOT = true;
     public static final boolean AUTO_LOG = false;
+    public static final boolean DRIVE_WITH_XBOX = false;
 
     public static final class Controllers{
         public static final GenericHID TRANSLATION_CONTROLLER = new GenericHID(0);
         public static final GenericHID ROTATION_CONTROLLER = new GenericHID(1);
         public static final GenericHID XBOX_CONTROLLER = new GenericHID(2);
         public static final GenericHID BUTTONS = new GenericHID(3);
+        public static final GenericHID XBOX_CONTROLLER_DRIVE = new GenericHID(4);
         public static final int BUTTON_ONE = 1;
         public static final int XBOXCONTROLLER_A_BUTTON = 1;
         public static final int XBOXCONTROLLER_B_BUTTON = 2;
@@ -37,9 +38,12 @@ public final class Constants {
         public static final double STICK_DEADBAND = 0.1;
         public static final int TRANSLATION_BUTTON = 1;
         public static final int ROTATION_BUTTON = 1;
+        public static final int TRANSLATION_BUTTON_XBOX = 9;
+        public static final int ROTATION_BUTTON_XBOX = 10;
         public static final int TRANSLATION_AXIS = 0;
         public static final int STRAFE_AXIS = 1;
         public static final int ROTATION_AXIS = 0;
+        public static final int XBOX_ROTATION_AXIS = 4;
     }
 
     public static final class DriveTrain {
